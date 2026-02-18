@@ -27,7 +27,7 @@
       "strings": true
     }
   },
-  "python.defaultInterpreterPath": "C\\venvs\\venv_stevillis_site\\Scripts\\python.exe",
+  "python.defaultInterpreterPath": "C:\\venvs\\venv_stevillis_site\\Scripts\\python.exe",
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
