@@ -53,9 +53,9 @@ python manage.py makemessages -l pt_BR -i venv
 python manage.py makemessages -l en -i venv
 ```
 
-2. Edit the .po files with Poedit
+1. Edit the .po files with Poedit
 
-3. Compile the translations
+2. Compile the translations
 
 ```shell
 python manage.py compilemessages
@@ -82,3 +82,19 @@ python manage.py cleancode
 ```
 
 ---
+
+## Deployment Troubleshooting
+
+### Missing Database Tables (Migrations not running on Railway)
+
+Sometimes when deploying to Railway and adding new Django apps, the `release` phase in the `Procfile` might fail to run the migrations automatically. If you encounter a `ProgrammingError: relation "<table_name>" does not exist` in the production environment after a deployment, you can manually run the migrations by logging directly into the Railway SSH environment:
+
+1. Open your project in the **Railway Dashboard**.
+2. Locate your **web** service.
+3. Right-click on the service (or open its context menu) and select **Copy SSH Command**.
+4. Paste and execute the SSH command in your local terminal to access the production container.
+5. Once inside the environment, manually run the migrations:
+
+   ```shell
+   python manage.py migrate
+   ```
