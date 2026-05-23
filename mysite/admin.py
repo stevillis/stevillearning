@@ -97,4 +97,6 @@ class CourseAdmin(admin.ModelAdmin):
         ("is_active", custom_titled_filter(_("Is Active"))),
     ]
     search_fields = ["name"]
+    list_select_related = ["institution"]
+    autocomplete_fields = ["institution", "categories", "formation"]
     ordering = ["-end_date"]
