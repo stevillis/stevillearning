@@ -31,6 +31,11 @@ RUNNING_LOCAL = os.getenv("STEVILLIS_SITE_RUNNING_LOCAL", False)
 
 ALLOWED_HOSTS = ["*"]
 
+# In Django 4.0+, you must explicitly specify trusted origins for CSRF if you are behind a proxy
+CSRF_TRUSTED_ORIGINS = [
+    "https://stevillis.up.railway.app",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
