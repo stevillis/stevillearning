@@ -7,11 +7,17 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stevillis_site.settings")
 django.setup()
 
-from django.test import TestCase
-from django.utils import timezone
+from django.test import TestCase  # noqa: E402
+from django.utils import timezone  # noqa: E402
 
-from mysite.models import Category, Course, Formation, Institution
-from mysite.services import dashboard_service
+from mysite.models import (  # noqa: E402
+    Category,
+    Certification,
+    Course,
+    Formation,
+    Institution,
+)
+from mysite.services import dashboard_service  # noqa: E402
 
 
 class DashboardServiceTest(TestCase):
@@ -58,12 +64,20 @@ class DashboardServiceTest(TestCase):
             end_date=timezone.now().date(),
         )
 
+        # Certification
+        self.cert1 = Certification.objects.create(
+            name="AWS Certified Solutions Architect",
+            issue_date=timezone.now().date(),
+            institution=self.institution,
+        )
+
     def test_get_dashboard_stats(self):
         """Test retrieving dashboard statistics."""
         stats = dashboard_service.get_dashboard_stats()
 
         self.assertEqual(stats["total_courses"], 2)
         self.assertEqual(stats["total_formations"], 1)
+        self.assertEqual(stats["total_certifications"], 1)
         self.assertEqual(stats["total_hours"], 30)
         self.assertEqual(stats["courses_completed"], 1)
         self.assertEqual(stats["courses_in_progress"], 1)
@@ -72,4 +86,6 @@ class DashboardServiceTest(TestCase):
         """Test retrieving recent activity."""
         activity = dashboard_service.get_recent_activity()
         self.assertTrue(len(activity) > 0)
-        self.assertEqual(activity[0]["type"], "Curso")
+        types = [item["type"] for item in activity]
+        self.assertIn("Curso", types)
+        self.assertIn("Certificação", types)

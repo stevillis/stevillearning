@@ -102,3 +102,42 @@ class Course(BaseModel):
     def __str__(self):
         """String representation of the Course model."""
         return self.name
+
+
+class Certification(BaseModel):
+    """Certification model representing professional certifications (AWS, Databricks, etc.)."""
+
+    name = models.CharField(_("Name"), max_length=120)
+    workload = models.FloatField(_("Workload"), null=True, blank=True)
+    description = models.TextField(_("Description"), null=True, blank=True)
+    credential_url = models.URLField(
+        _("Credential URL"), max_length=500, null=True, blank=True
+    )
+    credential_id = models.CharField(
+        _("Credential ID"), max_length=100, null=True, blank=True
+    )
+    issue_date = models.DateField(_("Issue Date"))
+    expiration_date = models.DateField(_("Expiration Date"), null=True, blank=True)
+    is_active = models.BooleanField(_("Is Active"), default=True)
+    categories = models.ManyToManyField(
+        Category, related_name="certifications", blank=True
+    )
+    institution = models.ForeignKey(
+        Institution,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="certifications",
+    )
+
+    class Meta:
+        """Meta information for Certification model."""
+
+        db_table = "certification"
+        verbose_name = _("Certification")
+        verbose_name_plural = _("Certifications")
+        ordering = ["-issue_date"]
+
+    def __str__(self):
+        """String representation of the Certification model."""
+        return self.name

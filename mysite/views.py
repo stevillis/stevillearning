@@ -1,7 +1,12 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 
-from mysite.services import course_service, dashboard_service, formation_services
+from mysite.services import (
+    certification_service,
+    course_service,
+    dashboard_service,
+    formation_services,
+)
 
 
 def index(request):
@@ -58,3 +63,26 @@ def courses(request):
 
     context = {"courses": courses_found}
     return render(request, "courses.html", context)
+
+
+def certification(request, pk):
+    """Render the certification detail page."""
+    certification_found = certification_service.get_certification(pk=pk)
+    context = {"certification": certification_found}
+    return render(request, "certification.html", context)
+
+
+def certifications(request):
+    """Render the certifications page with all certifications."""
+    certifications_list = certification_service.get_certifications()
+    paginator = Paginator(certifications_list, 12)
+    page = request.GET.get("page")
+    try:
+        certifications_found = paginator.page(page)
+    except PageNotAnInteger:
+        certifications_found = paginator.page(1)
+    except EmptyPage:
+        certifications_found = paginator.page(paginator.num_pages)
+
+    context = {"certifications": certifications_found}
+    return render(request, "certifications.html", context)

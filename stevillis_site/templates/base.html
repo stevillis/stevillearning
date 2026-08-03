@@ -50,6 +50,9 @@
                             <li class="px-4">
                                 <a href="{% url 'courses' %}" class="hover:text-rose">{% trans 'Courses' %}</a>
                             </li>
+                            <li class="px-4">
+                                <a href="{% url 'certifications' %}" class="hover:text-rose">{% trans 'Certificações' %}</a>
+                            </li>
                             {% comment %}
                     <li class="px-4">
                         <a href="#" class="hover:text-rose">
@@ -84,6 +87,10 @@
                             <a href="{% url 'courses' %}"
                                class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Courses' %}</a>
                         </li>
+                        <li>
+                            <a href="{% url 'certifications' %}"
+                               class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Certificações' %}</a>
+                        </li>
                         {% comment %}
                 <li>
                     <a href="#" class="block text-sm px-4 py-4 font-semibold hover:bg-rose">
@@ -97,8 +104,7 @@
         </header>
         <!-- Content -->
         <main class="mx-4 text-white md:px-20">
-            {% block content %}
-            {% endblock %}
+            {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
         <footer class="mx-4 py-5 bg-shark md:px-20">

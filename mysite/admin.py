@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from mysite.models import Category, Course, Formation, Institution
+from mysite.models import Category, Certification, Course, Formation, Institution
 
 
 def custom_titled_filter(title):
@@ -100,3 +100,39 @@ class CourseAdmin(admin.ModelAdmin):
     list_select_related = ["institution"]
     autocomplete_fields = ["institution", "categories", "formation"]
     ordering = ["-end_date"]
+
+
+@admin.register(Certification)
+class CertificationAdmin(admin.ModelAdmin):
+    """Admin configuration for Certification model."""
+
+    fields = [
+        "name",
+        "workload",
+        "description",
+        "credential_url",
+        "credential_id",
+        "issue_date",
+        "expiration_date",
+        "institution",
+        "categories",
+        "is_active",
+    ]
+    list_display = (
+        "name",
+        "institution",
+        "issue_date",
+        "expiration_date",
+        "is_active",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = [
+        ("institution", custom_titled_filter(_("Institution"))),
+        ("categories", custom_titled_filter(_("Category"))),
+        ("is_active", custom_titled_filter(_("Is Active"))),
+    ]
+    search_fields = ["name", "credential_id"]
+    list_select_related = ["institution"]
+    autocomplete_fields = ["institution", "categories"]
+    ordering = ["-issue_date"]

@@ -1,10 +1,10 @@
-""" "Service functions for dashboard statistics and recent activities."""
+"""Service functions for dashboard statistics and recent activities."""
 
 from typing import Any, Dict, List
 
 from django.db.models import Sum
 
-from mysite.models import Course, Formation
+from mysite.models import Certification, Course, Formation
 
 
 def get_dashboard_stats() -> Dict[str, Any]:
@@ -13,6 +13,7 @@ def get_dashboard_stats() -> Dict[str, Any]:
     """
     total_courses = Course.objects.filter(is_active=True).count()
     total_formations = Formation.objects.count()
+    total_certifications = Certification.objects.filter(is_active=True).count()
 
     # Calculate total hours (sum of workload from all courses)
     total_hours_data = Course.objects.filter(is_active=True).aggregate(
@@ -31,6 +32,7 @@ def get_dashboard_stats() -> Dict[str, Any]:
     return {
         "total_courses": total_courses,
         "total_formations": total_formations,
+        "total_certifications": total_certifications,
         "total_hours": total_hours,
         "courses_completed": courses_completed,
         "courses_in_progress": courses_in_progress,
@@ -39,8 +41,8 @@ def get_dashboard_stats() -> Dict[str, Any]:
 
 def get_recent_activity(limit: int = 5) -> List[Dict[str, Any]]:
     """
-    Fetches the most recently completed courses.
-    Returns a list sorted by end date.
+    Fetches the most recently completed courses and issued certifications.
+    Returns a list sorted by date.
     """
     activities = []
 
@@ -59,4 +61,20 @@ def get_recent_activity(limit: int = 5) -> List[Dict[str, Any]]:
             }
         )
 
-    return activities
+    recent_certifications = Certification.objects.filter(is_active=True).order_by(
+        "-issue_date"
+    )[:limit]
+
+    for certification in recent_certifications:
+        activities.append(
+            {
+                "type": "Certificação",
+                "id": certification.pk,
+                "description": f"{certification.name} ({certification.institution.name if certification.institution else 'N/A'})",
+                "end_date": certification.issue_date.strftime("%d/%m/%Y"),
+                "timestamp": certification.issue_date,
+            }
+        )
+
+    activities.sort(key=lambda x: x["timestamp"], reverse=True)
+    return activities[:limit]
