@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0010_alter_course_institution'),
+        ("mysite", "0010_alter_course_institution"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='formation',
-            name='workload',
-            field=models.CharField(blank=True, max_length=20, null=True, verbose_name='Workload'),
+            model_name="formation",
+            name="workload",
+            field=models.CharField(
+                blank=True, max_length=20, null=True, verbose_name="Workload"
+            ),
         ),
     ]

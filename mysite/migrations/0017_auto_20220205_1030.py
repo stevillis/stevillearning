@@ -4,20 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0016_auto_20211231_2313'),
+        ("mysite", "0016_auto_20211231_2313"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='course',
-            name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            model_name="course",
+            name="description",
+            field=models.TextField(blank=True, null=True, verbose_name="Description"),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='curriculum_map',
-            field=models.TextField(blank=True, null=True, verbose_name='Curriculum Map'),
+            model_name="course",
+            name="curriculum_map",
+            field=models.TextField(
+                blank=True, null=True, verbose_name="Curriculum Map"
+            ),
         ),
     ]

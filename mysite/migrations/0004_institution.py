@@ -4,22 +4,32 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0003_alter_category_table'),
+        ("mysite", "0003_alter_category_table"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Institution',
+            name="Institution",
             fields=[
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('id_institution', models.AutoField(primary_key=True, serialize=False, verbose_name='Institution ID')),
-                ('name', models.CharField(max_length=40, verbose_name='Name')),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "id_institution",
+                    models.AutoField(
+                        primary_key=True, serialize=False, verbose_name="Institution ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=40, verbose_name="Name")),
             ],
             options={
-                'db_table': 'institution',
+                "db_table": "institution",
             },
         ),
     ]

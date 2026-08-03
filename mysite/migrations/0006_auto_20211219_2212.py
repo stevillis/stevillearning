@@ -5,38 +5,63 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0005_auto_20211219_1806'),
+        ("mysite", "0005_auto_20211219_1806"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='formation',
-            name='workload',
-            field=models.CharField(max_length=20, verbose_name='Workload'),
+            model_name="formation",
+            name="workload",
+            field=models.CharField(max_length=20, verbose_name="Workload"),
         ),
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('name', models.CharField(max_length=60, verbose_name='Name')),
-                ('workload', models.CharField(max_length=20, verbose_name='Workload')),
-                ('curriculum_map', models.TextField(verbose_name='Curriculum Map')),
-                ('start_date', models.DateTimeField(verbose_name='Start Date')),
-                ('end_date', models.DateTimeField(verbose_name='End Date')),
-                ('categories', models.ManyToManyField(related_name='courses', to='mysite.Category')),
-                ('institution', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mysite.institution')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                ("name", models.CharField(max_length=60, verbose_name="Name")),
+                ("workload", models.CharField(max_length=20, verbose_name="Workload")),
+                ("curriculum_map", models.TextField(verbose_name="Curriculum Map")),
+                ("start_date", models.DateTimeField(verbose_name="Start Date")),
+                ("end_date", models.DateTimeField(verbose_name="End Date")),
+                (
+                    "categories",
+                    models.ManyToManyField(
+                        related_name="courses", to="mysite.Category"
+                    ),
+                ),
+                (
+                    "institution",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="mysite.institution",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.AddField(
-            model_name='formation',
-            name='courses',
-            field=models.ManyToManyField(related_name='formation', to='mysite.Course'),
+            model_name="formation",
+            name="courses",
+            field=models.ManyToManyField(related_name="formation", to="mysite.Course"),
         ),
     ]

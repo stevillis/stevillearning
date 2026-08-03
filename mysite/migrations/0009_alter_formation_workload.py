@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0008_auto_20211219_2224'),
+        ("mysite", "0008_auto_20211219_2224"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='formation',
-            name='workload',
-            field=models.CharField(max_length=20, null=True, verbose_name='Workload'),
+            model_name="formation",
+            name="workload",
+            field=models.CharField(max_length=20, null=True, verbose_name="Workload"),
         ),
     ]

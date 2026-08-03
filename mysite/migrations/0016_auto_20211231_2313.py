@@ -4,33 +4,42 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0015_alter_course_formation'),
+        ("mysite", "0015_alter_course_formation"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='course',
-            options={'ordering': ['-end_date'], 'verbose_name': 'Course', 'verbose_name_plural': 'Courses'},
+            name="course",
+            options={
+                "ordering": ["-end_date"],
+                "verbose_name": "Course",
+                "verbose_name_plural": "Courses",
+            },
         ),
         migrations.AlterModelOptions(
-            name='formation',
-            options={'ordering': ['-end_date'], 'verbose_name': 'Formation', 'verbose_name_plural': 'Formations'},
+            name="formation",
+            options={
+                "ordering": ["-end_date"],
+                "verbose_name": "Formation",
+                "verbose_name_plural": "Formations",
+            },
         ),
         migrations.AlterField(
-            model_name='course',
-            name='end_date',
-            field=models.DateField(blank=True, null=True, verbose_name='End Date'),
+            model_name="course",
+            name="end_date",
+            field=models.DateField(blank=True, null=True, verbose_name="End Date"),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='formation',
-            field=models.ManyToManyField(blank=True, related_name='courses', to='mysite.Formation'),
+            model_name="course",
+            name="formation",
+            field=models.ManyToManyField(
+                blank=True, related_name="courses", to="mysite.Formation"
+            ),
         ),
         migrations.AlterField(
-            model_name='formation',
-            name='end_date',
-            field=models.DateField(blank=True, null=True, verbose_name='End Date'),
+            model_name="formation",
+            name="end_date",
+            field=models.DateField(blank=True, null=True, verbose_name="End Date"),
         ),
     ]

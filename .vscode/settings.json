@@ -33,7 +33,7 @@
       "source.organizeImports": "explicit",
       "source.fixAll": "never"
     },
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.rulers": [

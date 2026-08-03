@@ -4,36 +4,49 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0004_institution'),
+        ("mysite", "0004_institution"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Formation',
+            name="Formation",
             fields=[
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('id_formation', models.AutoField(primary_key=True, serialize=False, verbose_name='Formation ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Name')),
-                ('workload', models.CharField(max_length=40, verbose_name='Workload')),
-                ('curriculum_map', models.TextField(verbose_name='Curriculum Map')),
-                ('start_date', models.DateTimeField(verbose_name='Start Date')),
-                ('end_date', models.DateTimeField(verbose_name='End Date')),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "id_formation",
+                    models.AutoField(
+                        primary_key=True, serialize=False, verbose_name="Formation ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Name")),
+                ("workload", models.CharField(max_length=40, verbose_name="Workload")),
+                ("curriculum_map", models.TextField(verbose_name="Curriculum Map")),
+                ("start_date", models.DateTimeField(verbose_name="Start Date")),
+                ("end_date", models.DateTimeField(verbose_name="End Date")),
             ],
             options={
-                'verbose_name': 'Formation',
-                'verbose_name_plural': 'Formations',
-                'db_table': 'formation',
+                "verbose_name": "Formation",
+                "verbose_name_plural": "Formations",
+                "db_table": "formation",
             },
         ),
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name': 'Category', 'verbose_name_plural': 'Categories'},
+            name="category",
+            options={"verbose_name": "Category", "verbose_name_plural": "Categories"},
         ),
         migrations.AlterModelOptions(
-            name='institution',
-            options={'verbose_name': 'Institution', 'verbose_name_plural': 'Instituitions'},
+            name="institution",
+            options={
+                "verbose_name": "Institution",
+                "verbose_name_plural": "Instituitions",
+            },
         ),
     ]

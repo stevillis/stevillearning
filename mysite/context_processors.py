@@ -6,5 +6,5 @@ from django.utils import translation
 def get_language(request):
     language = translation.get_language()
     translation.activate(language)
-    context = {'language': language}
+    context = {"language": language}
     return context

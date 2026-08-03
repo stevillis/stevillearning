@@ -4,30 +4,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0006_auto_20211219_2212'),
+        ("mysite", "0006_auto_20211219_2212"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='course',
-            name='end_date',
-            field=models.DateField(verbose_name='End Date'),
+            model_name="course",
+            name="end_date",
+            field=models.DateField(verbose_name="End Date"),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='start_date',
-            field=models.DateField(verbose_name='Start Date'),
+            model_name="course",
+            name="start_date",
+            field=models.DateField(verbose_name="Start Date"),
         ),
         migrations.AlterField(
-            model_name='formation',
-            name='end_date',
-            field=models.DateField(verbose_name='End Date'),
+            model_name="formation",
+            name="end_date",
+            field=models.DateField(verbose_name="End Date"),
         ),
         migrations.AlterField(
-            model_name='formation',
-            name='start_date',
-            field=models.DateField(verbose_name='Start Date'),
+            model_name="formation",
+            name="start_date",
+            field=models.DateField(verbose_name="Start Date"),
         ),
     ]

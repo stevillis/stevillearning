@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0013_auto_20211219_2320'),
+        ("mysite", "0013_auto_20211219_2320"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='formation',
-            name='courses',
+            model_name="formation",
+            name="courses",
         ),
         migrations.AddField(
-            model_name='course',
-            name='formation',
-            field=models.ManyToManyField(related_name='courses', to='mysite.Formation'),
+            model_name="course",
+            name="formation",
+            field=models.ManyToManyField(related_name="courses", to="mysite.Formation"),
         ),
     ]

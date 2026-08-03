@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0012_auto_20211219_2257'),
+        ("mysite", "0012_auto_20211219_2257"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='formation',
-            name='curriculum_map',
+            model_name="formation",
+            name="curriculum_map",
         ),
         migrations.AddField(
-            model_name='formation',
-            name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            model_name="formation",
+            name="description",
+            field=models.TextField(blank=True, null=True, verbose_name="Description"),
         ),
     ]

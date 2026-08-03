@@ -4,22 +4,24 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('mysite', '0007_auto_20211219_2215'),
+        ("mysite", "0007_auto_20211219_2215"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='course',
-            options={'verbose_name': 'Course', 'verbose_name_plural': 'Courses'},
+            name="course",
+            options={"verbose_name": "Course", "verbose_name_plural": "Courses"},
         ),
         migrations.AlterModelOptions(
-            name='institution',
-            options={'verbose_name': 'Institution', 'verbose_name_plural': 'Institutions'},
+            name="institution",
+            options={
+                "verbose_name": "Institution",
+                "verbose_name_plural": "Institutions",
+            },
         ),
         migrations.AlterModelTable(
-            name='course',
-            table='course',
+            name="course",
+            table="course",
         ),
     ]
