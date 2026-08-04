@@ -1,6 +1,37 @@
-[tool.isort]
-profile = "black"
+[project]
+name = "stevillearning"
+version = "0.1.0"
+description = "Stévillis Sousa Learning Hub Website"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.2.14",
+    "django-browser-reload>=1.17.0",
+    "django-environ>=0.12.0",
+    "djangorestframework>=3.17.1",
+    "djangorestframework-simplejwt>=5.5.1",
+    "django-tailwind>=4.5.0",
+    "gunicorn>=26.0.0",
+    "psycopg2-binary>=2.9.11",
+    "whitenoise>=6.9.0",
+]
 
-[tool.flake8]
-max-line-length = 88
-extend-ignore = "E203"
+[dependency-groups]
+dev = [
+    "cookiecutter>=2.6.0",
+    "coverage>=7.12.0",
+    "djlint>=1.43.2",
+    "greenlet>=3.1.1",
+    "pre-commit>=4.6.0",
+    "pytest>=9.0.1",
+    "pytest-django>=4.11.1",
+    "ruff>=0.14.10",
+    "waitress>=3.0.2",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "stevillis_site.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
