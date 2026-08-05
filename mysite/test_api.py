@@ -3,6 +3,7 @@ from django.core.cache import cache
 from django.urls import reverse
 from django.utils import timezone
 from rest_framework.test import APIClient
+
 from mysite.models import Course, Institution
 
 
@@ -13,9 +14,7 @@ def api_client():
 
 @pytest.fixture
 def test_user(django_user_model):
-    return django_user_model.objects.create_user(
-        username="testuser", password="testpassword123"
-    )
+    return django_user_model.objects.create_user(username="testuser", password="testpassword123")
 
 
 @pytest.fixture

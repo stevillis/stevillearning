@@ -1,7 +1,5 @@
 """Service functions for Course model operations."""
 
-from typing import Tuple
-
 from django.db.models import QuerySet
 from django.http import Http404
 from django.utils.translation import gettext as _
@@ -9,7 +7,7 @@ from django.utils.translation import gettext as _
 from mysite.models import Course
 
 
-def get_course(pk: int) -> Tuple[Course, Http404]:
+def get_course(pk: int) -> tuple[Course, Http404]:
     """
     Fetches a single course by its primary key.
     Raises Http404 if not found.
