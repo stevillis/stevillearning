@@ -3,124 +3,136 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-    {% trans 'Formations' %}
+    {% trans 'Formações' %}
 {% endblock title %}
 {% block content %}
-    <h1 class="text-4xl text-center mt-10 mb-2 text-rose md:text-7xl">{% trans 'Formações' %}</h1>
-    <p class="text-center text-silver mb-10">{% trans 'Meus caminhos de aprendizado e certificações' %}</p>
-    <div class="min-h-screen">
+    <!-- Header Banner -->
+    <div class="max-w-6xl mx-auto text-center py-8">
+        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">{% trans 'Formações' %}</h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-base">{% trans 'Explore minha jornada de aprendizado contínuo.' %}</p>
+    </div>
+    <!-- Formations List -->
+    <div class="max-w-6xl mx-auto mb-16 space-y-16">
         {% for formation in formations_qs %}
-            <div class="text-center mb-12 max-w-6xl mx-auto px-4"
-                 id="formation-{{ formation.pk }}">
-                <div class="bg-tuna rounded-xl border-2 border-rose p-8 mb-8 shadow-lg">
-                    <p class="text-rose text-3xl md:text-4xl font-bold mb-2">{{ formation }}</p>
-                    <p class="text-amber text-lg font-semibold mb-4">{{ formation.courses.first.institution.name }}</p>
-                    <div class="flex flex-wrap justify-center gap-4 text-sm">
-                        <span class="px-4 bg-springgreen/20 text-springgreen font-semibold rounded-lg">
-                            {{ formation.courses.count }} {% trans 'cursos' %}
-                        </span>
-                        <span class="px-4 text-amber font-semibold rounded-lg">
-                            {% if formation.workload %}
-                                {{ formation.workload }}
-                            {% else %}
-                                {% calculate_formation_workload formation.pk %}
-                            {% endif %}
-                            {% trans 'horas' %}
-                        </span>
-                    </div>
-                    <div class="flex flex-wrap justify-center gap-6 mt-2 text-sm border-t border-emperor pt-2">
+            <div class="space-y-6" id="formation-{{ formation.pk }}">
+                <!-- Formation Header Panel -->
+                <div class="glass-panel p-8 border-glow-blue relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-36 h-36 bg-blue-500/5 rounded-bl-full pointer-events-none"></div>
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                         <div>
-                            <p class="text-silver opacity-75 mb-1">{% trans 'Data de início' %}</p>
-                            <p class="text-springgreen font-semibold">{{ formation.start_date }}</p>
+                            <h2 class="text-3xl font-outfit font-black text-white group-hover:text-blue-400 transition-colors">{{ formation }}</h2>
+                            {% if formation.courses.first.institution %}
+                                <p class="text-sm font-mono text-cyan-400 mt-1 flex items-center gap-1.5">
+                                    <i class="bi bi-building"></i> {{ formation.courses.first.institution.name }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 text-xs font-semibold font-mono flex items-center gap-1.5">
+                                <i class="bi bi-journal-check"></i> {{ formation.courses.count }} {% trans 'cursos' %}
+                            </span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-semibold font-mono flex items-center gap-1.5">
+                                <i class="bi bi-clock"></i>
+                                {% if formation.workload %}
+                                    {{ formation.workload }}
+                                {% else %}
+                                    {% calculate_formation_workload formation.pk %}
+                                {% endif %}
+                                {% trans 'horas' %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-800 text-xs font-mono text-slate-400">
+                        <div>
+                            <span class="text-slate-500">{% trans 'Data de início' %}:</span>
+                            <span class="text-slate-200 font-semibold ml-1">{{ formation.start_date }}</span>
                         </div>
                         <div>
-                            <p class="text-silver opacity-75 mb-1">{% trans 'Data de fim' %}</p>
-                            <p class="text-springgreen font-semibold">
+                            <span class="text-slate-500">{% trans 'Data de fim' %}:</span>
+                            <span class="text-emerald-400 font-semibold ml-1">
                                 {% if formation.end_date %}
                                     {{ formation.end_date }}
                                 {% else %}
                                     {% trans 'Em progresso' %}
                                 {% endif %}
-                            </p>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <!-- Formation Courses Grid -->
-                <div class="grid grid-cols-1 gap-6 select-none mb-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 max-w-6xl mx-auto px-4">
+                <!-- Courses Grid within Formation -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 select-none pl-0 md:pl-4">
                     {% for course in formation.courses.all %}
-                        <div class="rounded-xl bg-tuna border-2 border-emperor hover:border-rose transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-rose/30 transform hover:-translate-y-1 group">
-                            <div class="p-6 h-full flex flex-col">
-                                <div class="mb-4">
-                                    <p class="text-rose text-lg font-bold line-clamp-2 group-hover:text-amber transition-colors">{{ course.name }}</p>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <span class="inline-block px-3 py-1 bg-rose/20 text-rose text-xs font-semibold rounded-full">{{ course.workload }} {% trans 'horas' %}</span>
-                                    </div>
+                        <div class="glass-panel border-glow-cyan p-6 flex flex-col justify-between group">
+                            <div>
+                                <!-- Header Badges -->
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="badge-cyan font-mono flex items-center gap-1">
+                                        <i class="bi bi-clock"></i> {{ course.workload }} {% trans 'horas' %}
+                                    </span>
+                                    {% if course.end_date %}
+                                        <span class="badge-emerald flex items-center gap-1">
+                                            <i class="bi bi-check-circle"></i> {% trans 'Concluído' %}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge-amber flex items-center gap-1">
+                                            <i class="bi bi-arrow-repeat"></i> {% trans 'Em progresso' %}
+                                        </span>
+                                    {% endif %}
                                 </div>
-                                <p class="text-silver text-justify text-sm line-clamp-4 mb-4 flex-grow">
-                                    {{ course.description|default_if_none:''|stringformat:'.150s' }}...
+                                <h3 class="text-lg font-outfit font-bold text-white mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                                    {{ course.name }}
+                                </h3>
+                                <p class="text-slate-400 text-xs line-clamp-3 mb-4 leading-relaxed">
+                                    {{ course.description|default_if_none:''|stringformat:'.130s' }}...
                                 </p>
-                                <div class="space-y-3 text-sm mb-4">
-                                    <div>
-                                        <p class="text-silver font-semibold mb-1">{% trans 'Categorias' %}</p>
+                                {% if course.categories.all %}
+                                    <div class="mb-4">
                                         <div class="flex flex-wrap gap-1">
                                             {% for category in course.categories.all %}
-                                                <span class="px-2 py-1 bg-amber/20 text-amber text-xs rounded">{{ category.name }}</span>
+                                                <span class="px-2 py-0.5 rounded bg-slate-800 text-cyan-300 text-xs font-medium">{{ category.name }}</span>
                                             {% endfor %}
                                         </div>
                                     </div>
-                                    <div class="grid grid-cols-2 gap-2 text-xs">
-                                        <div>
-                                            <p class="text-silver opacity-75">{% trans 'Início' %}</p>
-                                            <p class="text-springgreen font-semibold">{{ course.start_date }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-silver opacity-75">{% trans 'Fim' %}</p>
-                                            <p class="text-springgreen font-semibold">
-                                                {% if course.end_date %}
-                                                    {{ course.end_date }}
-                                                {% else %}
-                                                    {% trans 'Em progresso' %}
-                                                {% endif %}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="{% url 'course' course.pk %}"
-                                   class="inline-block px-4 py-2 bg-rose text-white font-semibold rounded-lg hover:bg-rose/80 transition-colors text-center w-full">
-                                    {% trans 'Ver Detalhes' %}
-                                </a>
+                                {% endif %}
                             </div>
+                            <a href="{% url 'course' course.pk %}"
+                               class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-slate-950 text-cyan-400 border border-cyan-500/30 font-outfit font-bold text-xs transition-all duration-200 text-center flex items-center justify-center gap-1.5 group/btn mt-auto">
+                                <span>{% trans 'Ver Detalhes' %}</span>
+                                <i class="bi bi-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
             </div>
+        {% empty %}
+            <div class="glass-panel p-12 text-center text-slate-500 font-mono">
+                {% trans 'Nenhuma formação cadastrada no momento.' %}
+            </div>
         {% endfor %}
         <!-- Pagination Controls -->
         {% if formations_qs.has_other_pages %}
-            <div class="flex justify-center items-center gap-2 my-12 flex-wrap max-w-6xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 my-12 flex-wrap">
                 {% if formations_qs.has_previous %}
                     <a href="?page=1"
-                       class="px-3 py-2 bg-rose text-white rounded-lg hover:bg-rose/80 transition-colors">
+                       class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
                         {% trans "Primeira" %}
                     </a>
                     <a href="?page={{ formations_qs.previous_page_number }}"
-                       class="px-3 py-2 bg-rose text-white rounded-lg hover:bg-rose/80 transition-colors">
-                        &#171; {% trans "Anterior" %}
+                       class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
+                        &laquo; {% trans "Anterior" %}
                     </a>
                 {% else %}
-                    <span class="px-3 py-2 bg-emperor text-silver rounded-lg opacity-50 cursor-not-allowed">{% trans "Primeira" %}</span>
-                    <span class="px-3 py-2 bg-emperor text-silver rounded-lg opacity-50 cursor-not-allowed">
-                        &#171; {% trans "Anterior" %}
-                    </span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans "Primeira" %}</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">&laquo; {% trans "Anterior" %}</span>
                 {% endif %}
                 <!-- Page numbers -->
-                <div class="flex gap-1">
+                <div class="flex gap-1.5">
                     {% for num in formations_qs.paginator.page_range %}
                         {% if formations_qs.number == num %}
-                            <span class="px-3 py-2 bg-amber text-tuna font-semibold rounded-lg">{{ num }}</span>
+                            <span class="px-3.5 py-2 bg-blue-500 text-slate-950 font-outfit font-bold rounded-lg text-sm">{{ num }}</span>
                         {% elif num > formations_qs.number|add:"-3" and num < formations_qs.number|add:"3" %}
                             <a href="?page={{ num }}"
-                               class="px-3 py-2 bg-emperor text-silver rounded-lg hover:bg-rose hover:text-white transition-colors">
+                               class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
                                 {{ num }}
                             </a>
                         {% endif %}
@@ -128,18 +140,16 @@
                 </div>
                 {% if formations_qs.has_next %}
                     <a href="?page={{ formations_qs.next_page_number }}"
-                       class="px-3 py-2 bg-rose text-white rounded-lg hover:bg-rose/80 transition-colors">
-                        {% trans "Próxima" %} &#187;
+                       class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
+                        {% trans "Próxima" %} &raquo;
                     </a>
                     <a href="?page={{ formations_qs.paginator.num_pages }}"
-                       class="px-3 py-2 bg-rose text-white rounded-lg hover:bg-rose/80 transition-colors">
+                       class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
                         {% trans "Última" %}
                     </a>
                 {% else %}
-                    <span class="px-3 py-2 bg-emperor text-silver rounded-lg opacity-50 cursor-not-allowed">
-                        {% trans "Próxima" %} &#187;
-                    </span>
-                    <span class="px-3 py-2 bg-emperor text-silver rounded-lg opacity-50 cursor-not-allowed">{% trans "Última" %}</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans "Próxima" %} &raquo;</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans "Última" %}</span>
                 {% endif %}
             </div>
         {% endif %}

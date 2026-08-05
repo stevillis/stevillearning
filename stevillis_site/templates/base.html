@@ -1,140 +1,167 @@
 {% load i18n %}
 {% load static %}
+{% load tailwind_tags %}
 <!DOCTYPE html>
-<html lang="{{ language }}">
+<html lang="{{ language|default:'pt-br' }}" class="dark scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
             {% block title %}{% endblock %}
+            | Stévillis Sousa - Learning Hub
         </title>
         <link rel="shortcut icon"
               href="{% static 'mysite/img/logo.ico' %}"
               type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+              rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
               integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
               crossorigin="anonymous"
               referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              type="text/css"
-              href="https://stevillis.github.io/style/storage/my-site.css">
+        {% tailwind_css %}
+        {% block extra_css %}{% endblock %}
     </head>
-    <body class="bg-shark">
-        <!-- Navbar -->
-        <header class="sticky border-b-2 top-0 z-50 bg-shark border-rose">
-            <div class="header-content flex justify-between items-center py-5 mx-4 md:px-20">
-                <div>
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'mysite/img/logo.png' %}" alt="Logo" class="w-20">
-                    </a>
-                </div>
-                <i class="hamburger-menu fas fa-bars text-white text-3xl hover:text-rose md:hidden"></i>
-                <div class="items-end flex-1 text-white font-bold hidden md:flex">
-                    <nav class="flex-1">
-                        <ul class="flex justify-end flex-1">
-                            <li class="px-4">
-                                <a href="{% url 'index' %}" class="hover:text-rose">{% trans 'Home' %}</a>
-                            </li>
-                            {% comment %}
-                    <li class="px-4">
-                        <a href="{% url 'projects' %}" class="hover:text-rose">
-                            {% trans 'Projects' %}
+    <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-poppins selection:bg-cyan-500/20 selection:text-cyan-300 antialiased relative overflow-x-hidden">
+        <!-- Global Background Atmosphere -->
+        <div class="fixed inset-0 z-[-1] pointer-events-none">
+            <div class="absolute inset-0 bg-radial-gradient"></div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+        </div>
+        <!-- Sticky Header & Navbar -->
+        <header class="sticky top-0 z-50 w-full transition-all duration-300 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Brand Logo / Title -->
+                    <div class="flex items-center gap-3">
+                        <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+                            <div class="flex flex-col">
+                                <span class="text-lg font-outfit font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
+                                    Stévillis Sousa
+                                </span>
+                                <span class="text-xs font-mono text-cyan-400 font-medium tracking-wider uppercase">Learning Hub</span>
+                            </div>
                         </a>
-                    </li>
-                            {% endcomment %}
-                            <li class="px-4">
-                                <a href="{% url 'formations' %}" class="hover:text-rose">{% trans 'Formations' %}</a>
-                            </li>
-                            <li class="px-4">
-                                <a href="{% url 'courses' %}" class="hover:text-rose">{% trans 'Courses' %}</a>
-                            </li>
-                            <li class="px-4">
-                                <a href="{% url 'certifications' %}" class="hover:text-rose">{% trans 'Certificações' %}</a>
-                            </li>
-                            {% comment %}
-                    <li class="px-4">
-                        <a href="#" class="hover:text-rose">
-                            {% trans 'About me' %}
+                    </div>
+                    <!-- Desktop Nav Menu -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                        <a href="{% url 'index' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-house text-cyan-400"></i>
+                            <span>{% trans 'Home' %}</span>
                         </a>
-                    </li>
-                            {% endcomment %}
-                        </ul>
+                        <a href="{% url 'formations' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-mortarboard text-blue-400"></i>
+                            <span>{% trans 'Formations' %}</span>
+                        </a>
+                        <a href="{% url 'courses' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-book text-cyan-400"></i>
+                            <span>{% trans 'Courses' %}</span>
+                        </a>
+                        <a href="{% url 'certifications' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-patch-check text-emerald-400"></i>
+                            <span>{% trans 'Certificações' %}</span>
+                        </a>
+                        <!-- External link to main portfolio & projects site -->
+                        <a href="https://stevillis.com.br"
+                           target="_blank"
+                           class="px-4 py-2 rounded-lg text-sm font-semibold text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all duration-200 flex items-center gap-2 ml-2">
+                            <i class="bi bi-code-slash"></i>
+                            <span>{% trans 'Projetos' %}</span>
+                            <i class="bi bi-box-arrow-up-right text-xs"></i>
+                        </a>
                     </nav>
+                    <!-- Mobile Hamburger Button -->
+                    <div class="flex items-center md:hidden">
+                        <button id="mobile-menu-button"
+                                type="button"
+                                class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none"
+                                aria-label="Menu">
+                            <i class="bi bi-list text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <!-- Mobile menu -->
-            <div class="hidden mobile-menu absolute right-0 w-screen opacity-95 bg-tuna px-4 md:px-20 md:hidden">
-                <nav>
-                    <ul class="text-white">
-                        <li>
-                            <a href="{% url 'index' %}"
-                               class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Home' %}</a>
-                        </li>
-                        {% comment %}
-                <li>
-                    <a href="{% url 'projects' %}" class="block text-sm px-4 py-4 font-semibold hover:bg-rose">
-                        {% trans 'Projects' %}
-                    </a>
-                </li>
-                        {% endcomment %}
-                        <li>
-                            <a href="{% url 'formations' %}"
-                               class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Formations' %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'courses' %}"
-                               class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Courses' %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'certifications' %}"
-                               class="block text-sm px-4 py-4 font-semibold hover:bg-rose">{% trans 'Certificações' %}</a>
-                        </li>
-                        {% comment %}
-                <li>
-                    <a href="#" class="block text-sm px-4 py-4 font-semibold hover:bg-rose">
-                        {% trans 'About me' %}
-                    </a>
-                </li>
-                        {% endcomment %}
-                    </ul>
-                </nav>
+            <!-- Mobile Dropdown Navigation -->
+            <div id="mobile-menu"
+                 class="hidden md:hidden bg-slate-900/95 backdrop-blur-2xl border-b border-slate-800 px-4 pt-2 pb-6 space-y-2">
+                <a href="{% url 'index' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400 flex items-center gap-3">
+                    <i class="bi bi-house text-cyan-400 text-lg"></i> Home
+                </a>
+                <a href="{% url 'formations' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-blue-400 flex items-center gap-3">
+                    <i class="bi bi-mortarboard text-blue-400 text-lg"></i> Formações
+                </a>
+                <a href="{% url 'courses' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400 flex items-center gap-3">
+                    <i class="bi bi-book text-cyan-400 text-lg"></i> Cursos
+                </a>
+                <a href="{% url 'certifications' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-emerald-400 flex items-center gap-3">
+                    <i class="bi bi-patch-check text-emerald-400 text-lg"></i> Certificações
+                </a>
+                <a href="https://stevillis.com.br"
+                   target="_blank"
+                   class="block px-4 py-3 rounded-xl text-base font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between">
+                    <span class="flex items-center gap-3"><i class="bi bi-code-slash text-lg"></i> Projetos (stevillis.com.br)</span>
+                    <i class="bi bi-box-arrow-up-right text-xs"></i>
+                </a>
             </div>
         </header>
-        <!-- Content -->
-        <main class="mx-4 text-white md:px-20">
+        <!-- Main Body Area -->
+        <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full relative z-10">
             {% block content %}{% endblock %}
         </main>
         <!-- Footer -->
-        <footer class="mx-4 py-5 bg-shark md:px-20">
-            <hr class="text-emperor">
-            <div class="flex justify-center items-center text-white">
-                <ul class="flex justify-center">
-                    <li class="flex items-center justify-evenly text-2xl h-12 rounded-full hover:text-rose mx-2">
-                        <a href="https://www.linkedin.com/in/stevillis/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </li>
-                    <li class="flex items-center justify-evenly text-2xl h-12 rounded-full hover:text-rose mx-2">
-                        <a href="https://github.com/stevillis" target="_blank"><i class="fab fa-github"></i></a>
-                    </li>
-                </ul>
+        <footer class="mt-auto border-t border-slate-800/80 bg-slate-950/80 py-10 relative z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <p class="text-sm text-slate-400 font-poppins">&copy; {% now 'Y' %} Stévillis Sousa</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.linkedin.com/in/stevillis/"
+                       target="_blank"
+                       class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all duration-300">
+                        <i class="bi bi-linkedin text-lg"></i>
+                    </a>
+                    <a href="https://github.com/stevillis"
+                       target="_blank"
+                       class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all duration-300">
+                        <i class="bi bi-github text-lg"></i>
+                    </a>
+                </div>
             </div>
-            <p class="text-gray-400 text-sm text-white text-center">&copy; {% now 'Y' %} Stévillis Sousa</p>
         </footer>
-        <!-- Scripts -->
-        <script src="{% static 'mysite/js/menu.js' %}"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <!-- Mobile Menu Toggle Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const btn = document.getElementById('mobile-menu-button');
+                const menu = document.getElementById('mobile-menu');
+                if (btn && menu) {
+                    btn.addEventListener('click', function() {
+                        menu.classList.toggle('hidden');
+                    });
+                }
+            });
+        </script>
+        <!-- Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-80TLJZXD5Y"></script>
         <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-80TLJZXD5Y');
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-80TLJZXD5Y');
         </script>
+        {% block extra_js %}{% endblock %}
     </body>
 </html>

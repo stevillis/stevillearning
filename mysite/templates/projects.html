@@ -1,44 +1,25 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
-
 {% block title %}
-{% trans 'Projetos' %}
+    {% trans 'Projetos' %}
 {% endblock title %}
-
 {% block content %}
-<h1 class="text-4xl text-center mt-10 text-rose md:text-7xl">{% trans 'Projects'%}</h1>
-<div class="grid grid-cols-1 my-10 text-white">
-    <div class="bg-tuna">
-        <div class="py-5 px-7 m-4">
-            <h2 class="text-center text-4xl pb-10">
-                {% trans 'Sistema de Registro de Certificados e Diplomas' %}
-            </h2>
-            <img src="{% static 'mysite/img/registro-diploma-preview.png' %}"
-                alt="{% trans 'Sistema de Registro de Certificados e Diplomas' %}" class="" />
-            <div class="pt-5 md:flex md:justify-between">
-                <h3 class="text-center text-xl">
-                    {% trans 'Status' %}: <span class="text-amber">{% trans 'Under development' %}</span>
-                </h3>
-                <h3 class="mt-1 text-center text-xl md:mt-0">
-                    {% trans 'Tecnologies' %}: Django, HTML, CSS, JavaScript, Bootstrap, PostgreSQL
-                </h3>
+    <div class="max-w-4xl mx-auto py-12 text-center">
+        <div class="glass-panel p-10 md:p-16 border-glow-cyan">
+            <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl mx-auto mb-6">
+                <i class="bi bi-code-slash"></i>
             </div>
-            <div class="flex justify-center mt-10 items-center">
-                <div>
-                    <div>
-                        <a href="https://obscure-badlands-07952.herokuapp.com" target="_blank"
-                            class="text-rose bg-white p-2 rounded-md h-auto hover:text-white hover:bg-rose">
-                            {% trans 'Live Preview' %}
-                        </a>
-                    </div>
-                    <div class="mt-5">
-                        <span>{% trans 'User' %}: admin</span><br>
-                        <span>{% trans 'Password' %}: 123456</span>
-                    </div>
-                </div>
-            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">{% trans 'Portfólio de Projetos' %}</h1>
+            <p class="text-slate-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8">
+                Os meus projetos práticos de Ciência de Dados, IA, Machine Learning e Desenvolvimento de Software estão publicados no meu site principal.
+            </p>
+            <a href="https://stevillis.com.br"
+               target="_blank"
+               class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-outfit font-bold text-base transition-all shadow-xl shadow-cyan-500/20 hover:scale-105">
+                <span>Acessar stevillis.com.br</span>
+                <i class="bi bi-box-arrow-up-right text-sm"></i>
+            </a>
         </div>
     </div>
-</div>
 {% endblock content %}
