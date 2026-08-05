@@ -45,7 +45,6 @@ ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
     default=[
         "learning.stevillis.com.br",
-        "stevillis.up.railway.app",
         "localhost",
         "127.0.0.1",
     ],
@@ -55,7 +54,6 @@ ALLOWED_HOSTS = env.list(
 CSRF_TRUSTED_ORIGINS = [
     "https://learning.stevillis.com.br",
     "http://learning.stevillis.com.br",
-    "https://stevillis.up.railway.app",
     "http://localhost:8003",
     "http://127.0.0.1:8003",
     "http://localhost:8000",

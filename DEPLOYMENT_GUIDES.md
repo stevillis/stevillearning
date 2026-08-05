@@ -6,7 +6,7 @@ Este guia descreve os processos para implantação da aplicação em ambiente de
 
 ## Arquitetura de Produção
 
-- **Domínio / Subdomínio**: `https://learning.stevillis.com.br` / `https://stevillis.up.railway.app`
+- **Domínio / Subdomínio**: `<https://learning.stevillis.com.br>`
 - **App Server**: Container Docker rodando `gunicorn` em `0.0.0.0:8003`.
 - **Gerenciador de Pacotes**: `uv` (compilação do Tailwind CSS standalone e `collectstatic` são executados automaticamente durante o build do `Dockerfile`).
 - **Arquivos Estáticos**: WhiteNoise (`whitenoise.storage.CompressedStaticFilesStorage`).
@@ -22,8 +22,8 @@ No ambiente de produção, configure as variáveis essenciais:
 SECRET_KEY=sua_secret_key_de_producao_super_segura
 STEVILLIS_SITE_RUNNING_LOCAL=False
 DEBUG=False
-ALLOWED_HOSTS=learning.stevillis.com.br,stevillis.up.railway.app,127.0.0.1,localhost
-CSRF_TRUSTED_ORIGINS=https://learning.stevillis.com.br,https://stevillis.up.railway.app
+ALLOWED_HOSTS=learning.stevillis.com.br,127.0.0.1,localhost
+CSRF_TRUSTED_ORIGINS=https://learning.stevillis.com.br
 
 # Conexão com Banco de Dados PostgreSQL Cloud (Supabase / Neon / Railway)
 DATABASE_URL=postgresql://postgres.YOUR_REF:YOUR_PASSWORD@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?sslmode=require
