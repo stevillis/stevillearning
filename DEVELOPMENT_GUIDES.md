@@ -107,8 +107,8 @@ O projeto possui uma suíte de testes automatizados com `pytest-django`, mediç�
 uv run pytest
 
 # Executar arquivos de teste específicos
-uv run pytest mysite/test_api.py
-uv run pytest mysite/tests_dashboard.py
+uv run pytest learning_hub/test_api.py
+uv run pytest learning_hub/tests_dashboard.py
 ```
 
 ### Relatório de Cobertura de Testes
@@ -139,7 +139,7 @@ uv run ruff format
 #### Templates HTML (djLint)
 
 ```bash
-uv run djlint mysite/templates/ stevillis_site/templates/ theme/templates/
+uv run djlint learning_hub/templates/ stevillearning/templates/ theme/templates/
 ```
 
 #### Hooks do Pre-Commit
@@ -192,7 +192,7 @@ A estrutura estática está dividida da seguinte forma:
 
 - **Estáticos do Tema (`theme/static/`)**:
   - `theme/static/css/dist/styles.css`: CSS final gerado pelo Tailwind CSS standalone binary.
-- **Estáticos da Aplicação (`static/` e `mysite/static/`)**:
+- **Estáticos da Aplicação (`static/` e `learning_hub/static/`)**:
   - Imagens, logos e ativos do projeto.
 - **Configuração no `settings.py`**:
 

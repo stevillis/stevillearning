@@ -1,0 +1,170 @@
+{% load static %}
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="pt-br" class="dark scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="{% block description %}Registro centralizado dos cursos, certificações técnicas e formações em Ciência de Dados, IA e Software de Stévillis Sousa.{% endblock %}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {% block title %}{% endblock %}
+            | Stévillis Sousa - Learning Hub
+        </title>
+        <link rel="shortcut icon"
+              href="{% static 'learning_hub/img/logo.ico' %}"
+              type="image/x-icon">
+        <link rel="icon"
+              href="{% static 'learning_hub/img/logo.png' %}"
+              type="image/png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+              rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+              integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer" />
+        {% tailwind_css %}
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-poppins selection:bg-cyan-500/20 selection:text-cyan-300 antialiased relative overflow-x-hidden">
+        <!-- Global Background Atmosphere -->
+        <div class="fixed inset-0 z-[-1] pointer-events-none">
+            <div class="absolute inset-0 bg-radial-gradient"></div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+        </div>
+        <!-- Sticky Header & Navbar -->
+        <header class="sticky top-0 z-50 w-full transition-all duration-300 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Brand Logo / Title -->
+                    <div class="flex items-center gap-3">
+                        <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+                            <div class="flex flex-col">
+                                <span class="text-lg font-outfit font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
+                                    Stévillis Sousa
+                                </span>
+                                <span class="text-xs font-mono text-cyan-400 font-medium tracking-wider uppercase">Learning Hub</span>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Desktop Nav Menu -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                        <a href="{% url 'index' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-house text-cyan-400"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="{% url 'formations' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-mortarboard text-blue-400"></i>
+                            <span>Formações</span>
+                        </a>
+                        <a href="{% url 'courses' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-book text-cyan-400"></i>
+                            <span>Cursos</span>
+                        </a>
+                        <a href="{% url 'certifications' %}"
+                           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
+                            <i class="bi bi-patch-check text-emerald-400"></i>
+                            <span>Certificações</span>
+                        </a>
+                        <!-- External link to main portfolio & projects site -->
+                        <a href="https://stevillis.com.br"
+                           target="_blank"
+                           class="px-4 py-2 rounded-lg text-sm font-semibold text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all duration-200 flex items-center gap-2 ml-2">
+                            <i class="bi bi-code-slash"></i>
+                            <span>Projetos</span>
+                            <i class="bi bi-box-arrow-up-right text-xs"></i>
+                        </a>
+                    </nav>
+                    <!-- Mobile Hamburger Button -->
+                    <div class="flex items-center md:hidden">
+                        <button id="mobile-menu-button"
+                                type="button"
+                                class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none"
+                                aria-label="Menu">
+                            <i class="bi bi-list text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Dropdown Navigation -->
+            <div id="mobile-menu"
+                 class="hidden md:hidden bg-slate-900/95 backdrop-blur-2xl border-b border-slate-800 px-4 pt-2 pb-6 space-y-2">
+                <a href="{% url 'index' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400 flex items-center gap-3">
+                    <i class="bi bi-house text-cyan-400 text-lg"></i> Home
+                </a>
+                <a href="{% url 'formations' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-blue-400 flex items-center gap-3">
+                    <i class="bi bi-mortarboard text-blue-400 text-lg"></i> Formações
+                </a>
+                <a href="{% url 'courses' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400 flex items-center gap-3">
+                    <i class="bi bi-book text-cyan-400 text-lg"></i> Cursos
+                </a>
+                <a href="{% url 'certifications' %}"
+                   class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-emerald-400 flex items-center gap-3">
+                    <i class="bi bi-patch-check text-emerald-400 text-lg"></i> Certificações
+                </a>
+                <a href="https://stevillis.com.br"
+                   target="_blank"
+                   class="block px-4 py-3 rounded-xl text-base font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between">
+                    <span class="flex items-center gap-3"><i class="bi bi-code-slash text-lg"></i> Projetos (stevillis.com.br)</span>
+                    <i class="bi bi-box-arrow-up-right text-xs"></i>
+                </a>
+            </div>
+        </header>
+        <!-- Main Body Area -->
+        <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full relative z-10">
+            {% block content %}{% endblock %}
+        </main>
+        <!-- Footer -->
+        <footer class="mt-auto border-t border-slate-800/80 bg-slate-950/80 py-10 relative z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <p class="text-sm text-slate-400 font-poppins">&copy; {% now 'Y' %} Stévillis Sousa</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.linkedin.com/in/stevillis/"
+                       target="_blank"
+                       class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all duration-300">
+                        <i class="bi bi-linkedin text-lg"></i>
+                    </a>
+                    <a href="https://github.com/stevillis"
+                       target="_blank"
+                       class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all duration-300">
+                        <i class="bi bi-github text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <!-- Mobile Menu Toggle Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const btn = document.getElementById('mobile-menu-button');
+                const menu = document.getElementById('mobile-menu');
+                if (btn && menu) {
+                    btn.addEventListener('click', function() {
+                        menu.classList.toggle('hidden');
+                    });
+                }
+            });
+        </script>
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-80TLJZXD5Y"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-80TLJZXD5Y');
+        </script>
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

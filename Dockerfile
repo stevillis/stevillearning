@@ -55,4 +55,4 @@ USER appuser
 
 EXPOSE 8003
 
-CMD ["gunicorn", "-w", "3", "--bind", "0.0.0.0:8003", "stevillis_site.wsgi:application"]
+CMD ["gunicorn", "-w", "3", "--bind", "0.0.0.0:8003", "stevillearning.wsgi:application"]

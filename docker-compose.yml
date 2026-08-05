@@ -10,7 +10,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    command: /app/.venv/bin/gunicorn -w 3 --bind 0.0.0.0:8003 stevillis_site.wsgi:application
+    command: /app/.venv/bin/gunicorn -w 3 --bind 0.0.0.0:8003 stevillearning.wsgi:application
     volumes:
       - .:/app
       - /app/.venv

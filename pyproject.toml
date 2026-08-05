@@ -33,5 +33,5 @@ dev = [
 line-length = 100
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "stevillis_site.settings"
+DJANGO_SETTINGS_MODULE = "stevillearning.settings"
 python_files = ["test_*.py", "*_test.py", "tests.py"]
