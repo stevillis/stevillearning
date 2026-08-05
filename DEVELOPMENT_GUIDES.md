@@ -182,7 +182,7 @@ Sobe o contêiner da aplicação rodando com Gunicorn:
    docker compose up --build
    ```
 
-2. Acesse a aplicação em: [http://localhost:8000/](http://localhost:8000/)
+2. Acesse a aplicação em: [http://localhost:8003/](http://localhost:8003/)
 
 ---
 

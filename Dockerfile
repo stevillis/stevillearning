@@ -53,6 +53,6 @@ RUN addgroup --system appgroup && adduser --system --group --home /home/appuser 
 
 USER appuser
 
-EXPOSE 8000
+EXPOSE 8003
 
-CMD ["gunicorn", "-w", "3", "--bind", "0.0.0.0:8000", "stevillis_site.wsgi:application"]
+CMD ["gunicorn", "-w", "3", "--bind", "0.0.0.0:8003", "stevillis_site.wsgi:application"]

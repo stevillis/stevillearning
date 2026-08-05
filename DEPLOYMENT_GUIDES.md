@@ -7,7 +7,7 @@ Este guia descreve os processos para implantação da aplicação em ambiente de
 ## Arquitetura de Produção
 
 - **Domínio / Subdomínio**: `https://learning.stevillis.com.br` / `https://stevillis.up.railway.app`
-- **App Server**: Container Docker rodando `gunicorn` em `0.0.0.0:8000`.
+- **App Server**: Container Docker rodando `gunicorn` em `0.0.0.0:8003`.
 - **Gerenciador de Pacotes**: `uv` (compilação do Tailwind CSS standalone e `collectstatic` são executados automaticamente durante o build do `Dockerfile`).
 - **Arquivos Estáticos**: WhiteNoise (`whitenoise.storage.CompressedStaticFilesStorage`).
 - **Banco de Dados**: PostgreSQL em nuvem (Railway / Supabase / Neon / VPS).
@@ -99,7 +99,7 @@ Se estiver implantando em uma VPS própria (ex: Oracle Cloud, DigitalOcean, Hetz
        client_max_body_size 20M;
 
        location / {
-           proxy_pass http://127.0.0.1:8000;
+           proxy_pass http://127.0.0.1:8003;
            proxy_set_header Host $host;
            proxy_set_header X-Real-IP $remote_addr;
            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -159,5 +159,5 @@ Se ao acessar o ambiente de produção for retornado erro de tabela não encontr
 3. Verifique o status das rotas estáticas via `curl`:
 
    ```bash
-   curl -I http://localhost:8000/static/css/dist/styles.css
+   curl -I http://localhost:8003/static/css/dist/styles.css
    ```
