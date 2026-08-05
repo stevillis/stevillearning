@@ -1,100 +1,94 @@
-# A Portfolio to show some IT courses I studied
+# Stévillis Sousa - Learning Hub
 
-## About the site
+Sistema de gestão de trajetória técnica, registro de cursos, certificações e formações acadêmicas. Desenvolvido com Python (Django 5.2), PostgreSQL, Django REST Framework, WhiteNoise e Tailwind CSS v4.
 
-The site was created using Django, PostgreSQL and Tailwind CSS. It has a public page that shows Courses, Formations and
-some information about me. Using Django Admin I created the Models where I can register the information about the
-courses and Formations that allows me to update the site content dinamically.
+---
 
-## The Entity Relationship Diagram
+## ✨ Principais Funcionalidades
 
-![Entity Relationship Diagram](https://github.com/stevillis/stevillis-site/blob/master/DER/DER.jpg?raw=true)
+- 📊 **Dashboard de Aprendizado**: Exibição de métricas gerais e progresso de cursos concluídos e em andamento.
+- 🎓 **Gestão Completa de Cursos, Formações e Certificações**: Registro, visualização e acompanhamento detalhado de histórico acadêmico e técnico.
+- 🌐 **Internacionalização Completa (i18n)**: Suporte bilíngue (Português `pt-BR` e Inglês `en`) com persistência de idioma.
+- ⚡ **API REST & Autenticação JWT**: Endpoints padronizados com Django REST Framework (`djangorestframework`) e autenticação via `djangorestframework-simplejwt`.
+- 🎨 **Interface Moderna & Responsiva**: Design escuro glassmórfico em Tailwind CSS v4 Standalone (compilação rápida sem necessidade de Node.js).
+- ⚡ **Desenvolvimento com Hot Reload**: Recarregamento automático dos templates e CSS via `django-browser-reload`.
+- 📦 **Gerenciamento de Dependências Moderno (`uv`)**: Resolução de dependências extremamente rápida e reprodutível via `pyproject.toml`.
+- 🐳 **Deploy Containerizado com Docker**: Suporte a containerização multi-stage e Docker Compose com Gunicorn.
 
-## Testing
+---
 
-Run all tests locally
+## 📐 Modelo de Dados (Diagrama ER)
 
-```shell
-coverage run -m pytest
+![Entity Relationship Diagram](https://github.com/stevillis/stevillearning/blob/master/DER/DER.jpg?raw=true)
+
+---
+
+## 🚀 Quick Start
+
+### 1. Pré-requisitos
+
+- [uv](https://github.com/astral-sh/uv) (`pip install uv`)
+- Docker & Docker Compose (opcional para execução em contêiner)
+
+### 2. Configuração do Ambiente
+
+```bash
+# Sincronizar dependências no .venv
+uv sync
+
+# Configurar variáveis de ambiente (.env)
+cp .env-example .env
+
+# Executar as migrações do banco de dados
+uv run python manage.py migrate
 ```
 
-Run an individual test
+### 3. Compilar o Tailwind CSS (Standalone)
 
-```shell
-coverage run -m pytest mysite/tests.py mysite/tests_dashboard.py
+```bash
+# Compilar o arquivo CSS em modo único:
+uv run python manage.py tailwind build
+
+# Ou iniciar o observador (watcher) para recompilação automática:
+uv run python manage.py tailwind start
 ```
 
-Generate a report on terminal
+### 4. Executar Servidor Local
 
-```shell
-coverage report -m
+```bash
+# Servidor Django com recarregamento em tempo real:
+uv run python manage.py runserver
 ```
 
-Generate a html report
+Acesse [http://127.0.0.1:8000/](http://127.0.0.1:8000/) no seu navegador.
 
-```shell
-coverage html
-```
+---
 
-Visualize the report opening the `htmlcov/index.html` file or running the command bellow and opening the <http://0.0.0.0:8000/> on the browser
+## 🧪 Testes e Qualidade de Código
 
-```shell
-python -m http.server
-```
+O projeto utiliza `pytest`, `coverage`, `ruff`, `djlint` e `pre-commit` para garantia de qualidade:
 
-## Development instructions
+```bash
+# Executar a suíte de testes
+uv run pytest
 
-### Translation
+# Executar com relatório de cobertura
+uv run coverage run -m pytest
+uv run coverage report
 
-1. Generate translations
+# Verificar linting e formatação Python
+uv run ruff check --fix
+uv run ruff format
 
-```shell
-python manage.py makemessages -l pt_BR -i venv
-python manage.py makemessages -l en -i venv
-```
-
-1. Edit the .po files with Poedit
-
-2. Compile the translations
-
-```shell
-python manage.py compilemessages
+# Instalar hooks do pre-commit no Git local
+uv run pre-commit install
 ```
 
 ---
 
-### Customize Tailwind CSS
+## 📚 Guias de Referência
 
-Compile modifications on tailwind.config.js file
-
-```shell
-npx tailwindcss build -i style.css -o dist/my-site.css
-```
-
----
-
-### Coding Style fixing by custom django command
-
-Fix import ordering with isort and show some warnings about the code with flake8 on the console
-
-```shell
-python manage.py cleancode
-```
-
----
-
-## Deployment Troubleshooting
-
-### Missing Database Tables (Migrations not running on Railway)
-
-Sometimes when deploying to Railway and adding new Django apps, the `release` phase in the `Procfile` might fail to run the migrations automatically. If you encounter a `ProgrammingError: relation "<table_name>" does not exist` in the production environment after a deployment, you can manually run the migrations by logging directly into the Railway SSH environment:
-
-1. Open your project in the **Railway Dashboard**.
-2. Locate your **web** service.
-3. Right-click on the service (or open its context menu) and select **Copy SSH Command**.
-4. Paste and execute the SSH command in your local terminal to access the production container.
-5. Once inside the environment, manually run the migrations:
-
-   ```shell
-   python manage.py migrate
-   ```
+- 📖 [Guia de Desenvolvimento Local (`DEVELOPMENT_GUIDES.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DEVELOPMENT_GUIDES.md)
+- 🚀 [Guia de Deploy em Produção (`DEPLOYMENT_GUIDES.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DEPLOYMENT_GUIDES.md)
+- 🎯 [Visão do Produto (`PRODUCT.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/PRODUCT.md)
+- 🎨 [Diretrizes de Design (`DESIGN.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DESIGN.md)

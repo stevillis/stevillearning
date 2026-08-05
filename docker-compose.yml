@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    image: stevillis/stevillearning:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: /app/.venv/bin/gunicorn -w 3 --bind 0.0.0.0:8000 stevillis_site.wsgi:application
+    volumes:
+      - .:/app
+      - /app/.venv
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
