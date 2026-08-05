@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
-{% load i18n %}
 {% load static %}
 {% block title %}
-    {% trans 'Projetos' %}
+    Projetos
 {% endblock title %}
+{% block description %}
+    Projetos práticos de Ciência de Dados, IA, Machine Learning e Desenvolvimento de Software de Stévillis Sousa.
+{% endblock description %}
 {% block content %}
     <div class="max-w-4xl mx-auto py-12 text-center">
         <div class="glass-panel p-10 md:p-16 border-glow-cyan">
             <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl mx-auto mb-6">
                 <i class="bi bi-code-slash"></i>
             </div>
-            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">{% trans 'Portfólio de Projetos' %}</h1>
+            <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">Portfólio de Projetos</h1>
             <p class="text-slate-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8">
                 Os meus projetos práticos de Ciência de Dados, IA, Machine Learning e Desenvolvimento de Software estão publicados no meu site principal.
             </p>

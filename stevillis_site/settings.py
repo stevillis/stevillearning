@@ -10,12 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 from datetime import timedelta
 from pathlib import Path
 
 import environ
-from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,7 +87,6 @@ INTERNAL_IPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -114,7 +111,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "mysite.context_processors.get_language",
             ],
         },
     },
@@ -162,16 +158,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pt-br"
 
-LANGUAGES = (
-    ("pt-BR", _("Portuguese")),
-    ("en", _("English")),
-)
-
-LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
-
 TIME_ZONE = "America/Cuiaba"
 
-USE_I18N = True
+USE_I18N = False
 
 USE_TZ = True
 

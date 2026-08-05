@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
-{% load i18n %}
 {% load static %}
 {% block title %}
-    {% trans 'Certificações' %}
+    Certificações
 {% endblock title %}
+{% block description %}
+    Confira as certificações profissionais e credenciais técnicas verificadas obtidas por Stévillis Sousa.
+{% endblock description %}
 {% block content %}
     <!-- Header Banner -->
     <div class="max-w-6xl mx-auto text-center py-8">
-        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">{% trans 'Certificações' %}</h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-base">{% trans 'Explore minha jornada de aprendizado contínuo.' %}</p>
+        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">Certificações</h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-base">Explore minha jornada de aprendizado contínuo.</p>
     </div>
     <!-- Certifications Grid -->
     <div class="max-w-6xl mx-auto mb-12">
@@ -19,11 +21,11 @@
                         <!-- Header Badges -->
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <span class="badge-emerald flex items-center gap-1">
-                                <i class="bi bi-patch-check-fill"></i> {% trans 'Verificada' %}
+                                <i class="bi bi-patch-check-fill"></i> Verificada
                             </span>
                             {% if cert.workload %}
                                 <span class="badge-cyan font-mono flex items-center gap-1">
-                                    <i class="bi bi-clock"></i> {{ cert.workload }} {% trans 'horas' %}
+                                    <i class="bi bi-clock"></i> {{ cert.workload }} horas
                                 </span>
                             {% endif %}
                         </div>
@@ -45,7 +47,7 @@
                         <!-- Categories -->
                         {% if cert.categories.all %}
                             <div class="mb-4">
-                                <span class="text-xs font-mono text-slate-500 uppercase block mb-1.5">{% trans 'Categorias' %}</span>
+                                <span class="text-xs font-mono text-slate-500 uppercase block mb-1.5">Categorias</span>
                                 <div class="flex flex-wrap gap-1.5">
                                     {% for category in cert.categories.all %}
                                         <span class="px-2 py-0.5 rounded-md bg-slate-800 text-emerald-300 border border-slate-700 text-xs font-medium">
@@ -58,16 +60,16 @@
                         <!-- Dates -->
                         <div class="grid grid-cols-2 gap-2 text-xs py-3 border-t border-slate-800/80 mb-4">
                             <div>
-                                <span class="text-slate-500 block">{% trans 'Emissão' %}</span>
+                                <span class="text-slate-500 block">Emissão</span>
                                 <span class="text-emerald-400 font-semibold font-mono">{{ cert.issue_date }}</span>
                             </div>
                             <div>
-                                <span class="text-slate-500 block">{% trans 'Expiração' %}</span>
+                                <span class="text-slate-500 block">Expiração</span>
                                 <span class="text-slate-300 font-semibold font-mono">
                                     {% if cert.expiration_date %}
                                         {{ cert.expiration_date }}
                                     {% else %}
-                                        {% trans 'Vitalícia' %}
+                                        Vitalícia
                                     {% endif %}
                                 </span>
                             </div>
@@ -81,19 +83,19 @@
                                rel="noopener noreferrer"
                                class="w-full py-2 px-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-all text-center flex items-center justify-center gap-1.5">
                                 <i class="bi bi-box-arrow-up-right"></i>
-                                <span>{% trans 'Ver Credencial Oficial' %}</span>
+                                <span>Ver Credencial Oficial</span>
                             </a>
                         {% endif %}
                         <a href="{% url 'certification' cert.pk %}"
                            class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-emerald-500 hover:text-slate-950 text-emerald-400 border border-emerald-500/30 font-outfit font-bold text-sm transition-all duration-200 text-center flex items-center justify-center gap-2 group/btn">
-                            <span>{% trans 'Ver Detalhes' %}</span>
+                            <span>Ver Detalhes</span>
                             <i class="bi bi-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
             {% empty %}
                 <div class="col-span-full glass-panel p-12 text-center text-slate-500 font-mono">
-                    {% trans 'Nenhuma certificação cadastrada no momento.' %}
+                    Nenhuma certificação cadastrada no momento.
                 </div>
             {% endfor %}
         </div>
@@ -103,15 +105,15 @@
                 {% if certifications.has_previous %}
                     <a href="?page=1"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-emerald-500/50 hover:text-emerald-400 transition-colors text-sm font-medium">
-                        {% trans 'Primeira' %}
+                        Primeira
                     </a>
                     <a href="?page={{ certifications.previous_page_number }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-emerald-500/50 hover:text-emerald-400 transition-colors text-sm font-medium">
-                        &laquo; {% trans 'Anterior' %}
+                        &laquo; Anterior
                     </a>
                 {% else %}
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans 'Primeira' %}</span>
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">&laquo; {% trans 'Anterior' %}</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Primeira</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">&laquo; Anterior</span>
                 {% endif %}
                 <!-- Page numbers -->
                 <div class="flex gap-1.5">
@@ -129,15 +131,15 @@
                 {% if certifications.has_next %}
                     <a href="?page={{ certifications.next_page_number }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-emerald-500/50 hover:text-emerald-400 transition-colors text-sm font-medium">
-                        {% trans 'Próxima' %} &raquo;
+                        Próxima &raquo;
                     </a>
                     <a href="?page={{ certifications.paginator.num_pages }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-emerald-500/50 hover:text-emerald-400 transition-colors text-sm font-medium">
-                        {% trans 'Última' %}
+                        Última
                     </a>
                 {% else %}
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans 'Próxima' %} &raquo;</span>
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">{% trans 'Última' %}</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Próxima &raquo;</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Última</span>
                 {% endif %}
             </div>
         {% endif %}

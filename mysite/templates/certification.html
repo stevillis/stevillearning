@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% load i18n %}
 {% load static %}
 {% block title %}
-    {{ certification.name }} - {% trans 'Certification' %}
+    {{ certification.name }} - Certificação
 {% endblock title %}
+{% block description %}
+    Detalhes da certificação {{ certification.name }}{% if certification.institution %} emitida por {{ certification.institution.name }}{% endif %}. {{ certification.description|default:''|striptags|truncatewords:25 }}
+{% endblock description %}
 {% block content %}
     <div class="max-w-4xl mx-auto py-6">
         <!-- Back Link -->
@@ -11,7 +13,7 @@
             <a href="{% url 'certifications' %}"
                class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-400 font-medium transition-colors group">
                 <i class="bi bi-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-                <span>{% trans 'Voltar para Certificações' %}</span>
+                <span>Voltar para Certificações</span>
             </a>
         </div>
         <!-- Certification Header Card -->
@@ -19,11 +21,11 @@
             <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none"></div>
             <div class="flex flex-wrap items-center gap-3 mb-4">
                 <span class="badge-emerald flex items-center gap-1.5 text-xs">
-                    <i class="bi bi-patch-check-fill"></i> {% trans 'Credencial Verificada' %}
+                    <i class="bi bi-patch-check-fill"></i> Credencial Verificada
                 </span>
                 {% if certification.workload %}
                     <span class="badge-cyan font-mono flex items-center gap-1.5 text-xs">
-                        <i class="bi bi-clock"></i> {{ certification.workload }} {% trans 'horas' %}
+                        <i class="bi bi-clock"></i> {{ certification.workload }} horas
                     </span>
                 {% endif %}
             </div>
@@ -31,13 +33,13 @@
             <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-800 text-sm text-slate-300">
                 {% if certification.institution %}
                     <div class="flex items-center gap-2">
-                        <span class="text-slate-500 font-mono">{% trans 'Instituição' %}:</span>
+                        <span class="text-slate-500 font-mono">Instituição:</span>
                         <span class="font-semibold text-emerald-400">{{ certification.institution.name }}</span>
                     </div>
                 {% endif %}
                 {% if certification.credential_id %}
                     <div class="flex items-center gap-2">
-                        <span class="text-slate-500 font-mono">{% trans 'ID da Credencial' %}:</span>
+                        <span class="text-slate-500 font-mono">ID da Credencial:</span>
                         <span class="font-mono text-cyan-300 text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-md">{{ certification.credential_id }}</span>
                     </div>
                 {% endif %}
@@ -49,7 +51,7 @@
                        rel="noopener noreferrer"
                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-outfit font-bold text-sm transition-all shadow-lg shadow-emerald-500/20 hover:scale-105">
                         <i class="bi bi-box-arrow-up-right text-base"></i>
-                        <span>{% trans 'Verificar Credencial Oficial' %}</span>
+                        <span>Verificar Credencial Oficial</span>
                     </a>
                 </div>
             {% endif %}
@@ -60,7 +62,7 @@
                 <div>
                     <h2 class="text-xl font-outfit font-bold text-white mb-4 flex items-center gap-2">
                         <span class="w-1.5 h-6 bg-emerald-400 rounded-full"></span>
-                        {% trans 'Descrição da Certificação' %}
+                        Descrição da Certificação
                     </h2>
                     <div class="text-slate-300 text-base leading-relaxed space-y-4">{{ certification.description|linebreaks }}</div>
                 </div>
@@ -71,16 +73,16 @@
                     <!-- Left Column -->
                     <div class="space-y-4">
                         <div>
-                            <span class="text-xs font-mono text-slate-500 uppercase block mb-1">{% trans 'Data de Emissão' %}</span>
+                            <span class="text-xs font-mono text-slate-500 uppercase block mb-1">Data de Emissão</span>
                             <span class="text-emerald-400 text-base font-semibold font-mono">{{ certification.issue_date }}</span>
                         </div>
                         <div>
-                            <span class="text-xs font-mono text-slate-500 uppercase block mb-1">{% trans 'Data de Expiração' %}</span>
+                            <span class="text-xs font-mono text-slate-500 uppercase block mb-1">Data de Expiração</span>
                             <span class="text-slate-300 text-base font-semibold font-mono">
                                 {% if certification.expiration_date %}
                                     {{ certification.expiration_date }}
                                 {% else %}
-                                    {% trans 'Sem expiração (Vitalícia)' %}
+                                    Sem expiração (Vitalícia)
                                 {% endif %}
                             </span>
                         </div>
@@ -89,13 +91,13 @@
                     <div class="space-y-4">
                         {% if certification.workload %}
                             <div>
-                                <span class="text-xs font-mono text-slate-500 uppercase block mb-1">{% trans 'Carga Horária' %}</span>
-                                <span class="text-cyan-400 text-base font-semibold font-mono">{{ certification.workload }} {% trans 'horas' %}</span>
+                                <span class="text-xs font-mono text-slate-500 uppercase block mb-1">Carga Horária</span>
+                                <span class="text-cyan-400 text-base font-semibold font-mono">{{ certification.workload }} horas</span>
                             </div>
                         {% endif %}
                         {% if certification.categories.all %}
                             <div>
-                                <span class="text-xs font-mono text-slate-500 uppercase block mb-2">{% trans 'Categorias' %}</span>
+                                <span class="text-xs font-mono text-slate-500 uppercase block mb-2">Categorias</span>
                                 <div class="flex flex-wrap gap-2">
                                     {% for category in certification.categories.all %}
                                         <span class="px-3 py-1.5 rounded-lg bg-slate-900 text-emerald-300 border border-slate-800 text-xs font-medium flex items-center gap-1.5">

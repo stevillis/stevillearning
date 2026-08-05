@@ -1,10 +1,10 @@
-{% load i18n %}
 {% load static %}
 {% load tailwind_tags %}
 <!DOCTYPE html>
-<html lang="{{ language|default:'pt-br' }}" class="dark scroll-smooth">
+<html lang="pt-br" class="dark scroll-smooth">
     <head>
         <meta charset="UTF-8" />
+        <meta name="description" content="{% block description %}Registro centralizado dos cursos, certificações técnicas e formações em Ciência de Dados, IA e Software de Stévillis Sousa.{% endblock %}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
@@ -54,29 +54,29 @@
                         <a href="{% url 'index' %}"
                            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                             <i class="bi bi-house text-cyan-400"></i>
-                            <span>{% trans 'Home' %}</span>
+                            <span>Home</span>
                         </a>
                         <a href="{% url 'formations' %}"
                            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                             <i class="bi bi-mortarboard text-blue-400"></i>
-                            <span>{% trans 'Formations' %}</span>
+                            <span>Formações</span>
                         </a>
                         <a href="{% url 'courses' %}"
                            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                             <i class="bi bi-book text-cyan-400"></i>
-                            <span>{% trans 'Courses' %}</span>
+                            <span>Cursos</span>
                         </a>
                         <a href="{% url 'certifications' %}"
                            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white hover:bg-slate-800/60">
                             <i class="bi bi-patch-check text-emerald-400"></i>
-                            <span>{% trans 'Certificações' %}</span>
+                            <span>Certificações</span>
                         </a>
                         <!-- External link to main portfolio & projects site -->
                         <a href="https://stevillis.com.br"
                            target="_blank"
                            class="px-4 py-2 rounded-lg text-sm font-semibold text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all duration-200 flex items-center gap-2 ml-2">
                             <i class="bi bi-code-slash"></i>
-                            <span>{% trans 'Projetos' %}</span>
+                            <span>Projetos</span>
                             <i class="bi bi-box-arrow-up-right text-xs"></i>
                         </a>
                     </nav>

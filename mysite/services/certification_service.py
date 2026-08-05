@@ -2,7 +2,6 @@
 
 from django.db.models import QuerySet
 from django.http import Http404
-from django.utils.translation import gettext as _
 
 from mysite.models import Certification
 
@@ -15,7 +14,7 @@ def get_certification(pk: int) -> Certification:
     try:
         return Certification.objects.get(pk=pk)
     except Certification.DoesNotExist:
-        raise Http404(_("Certification not found!"))
+        raise Http404("Certification not found!")
 
 
 def get_certifications() -> QuerySet:

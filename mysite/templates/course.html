@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
-{% load i18n %}
 {% load static %}
 {% block title %}
-    {{ course.name }} - {% trans 'Course' %}
+    {{ course.name }} - Curso
 {% endblock title %}
+{% block description %}
+    Detalhes do curso {{ course.name }}{% if course.institution %} ministrado por {{ course.institution.name }}{% endif %}. {{ course.description|default:''|striptags|truncatewords:25 }}
+{% endblock description %}
 {% block content %}
     <div class="max-w-4xl mx-auto py-6">
         <!-- Back Link -->
@@ -12,7 +14,7 @@
             <a href="{% url 'courses' %}"
                class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-400 font-medium transition-colors group">
                 <i class="bi bi-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-                <span>{% trans 'Voltar para Cursos' %}</span>
+                <span>Voltar para Cursos</span>
             </a>
         </div>
         <!-- Course Header Card -->
@@ -20,15 +22,15 @@
             <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-bl-full pointer-events-none"></div>
             <div class="flex flex-wrap items-center gap-3 mb-4">
                 <span class="badge-cyan font-mono flex items-center gap-1.5 text-xs">
-                    <i class="bi bi-clock"></i> {{ course.workload }} {% trans 'horas' %}
+                    <i class="bi bi-clock"></i> {{ course.workload }} horas
                 </span>
                 {% if course.end_date %}
                     <span class="badge-emerald flex items-center gap-1.5 text-xs">
-                        <i class="bi bi-check-circle-fill"></i> {% trans 'Concluído' %}
+                        <i class="bi bi-check-circle-fill"></i> Concluído
                     </span>
                 {% else %}
                     <span class="badge-amber flex items-center gap-1.5 text-xs">
-                        <i class="bi bi-arrow-repeat"></i> {% trans 'Em progresso' %}
+                        <i class="bi bi-arrow-repeat"></i> Em progresso
                     </span>
                 {% endif %}
             </div>
@@ -36,25 +38,25 @@
             <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-800 text-sm text-slate-300">
                 {% if course.institution %}
                     <div class="flex items-center gap-2">
-                        <span class="text-slate-500 font-mono">{% trans 'Instituição' %}:</span>
+                        <span class="text-slate-500 font-mono">Instituição:</span>
                         <span class="font-semibold text-cyan-400">{{ course.institution.name }}</span>
                     </div>
                 {% endif %}
                 <div class="flex items-center gap-2">
-                    <span class="text-slate-500 font-mono">{% trans 'Período' %}:</span>
+                    <span class="text-slate-500 font-mono">Período:</span>
                     <span class="font-semibold text-slate-200 font-mono">
                         {{ course.start_date }}
                         {% if course.end_date %}
                             — {{ course.end_date }}
                         {% else %}
-                            ({% trans 'Em progresso' %})
+                            (Em progresso)
                         {% endif %}
                     </span>
                 </div>
             </div>
             {% if course.formation.count > 0 %}
                 <div class="mt-6 pt-6 border-t border-slate-800">
-                    <span class="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-3">{% trans "Parte das formações" %}</span>
+                    <span class="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-3">Parte das formações</span>
                     <div class="flex flex-wrap gap-2">
                         {% for formation in course.formation.all %}
                             <a href="{% link_to_formation_section 'formations' formation.pk %}"
@@ -73,7 +75,7 @@
             <div>
                 <h2 class="text-xl font-outfit font-bold text-white mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-6 bg-cyan-400 rounded-full"></span>
-                    {% trans 'Descrição do Curso' %}
+                    Descrição do Curso
                 </h2>
                 <div class="text-slate-300 text-base leading-relaxed space-y-4">{{ course.description|linebreaks }}</div>
             </div>
@@ -82,7 +84,7 @@
                 <div class="pt-8 border-t border-slate-800">
                     <h2 class="text-xl font-outfit font-bold text-white mb-4 flex items-center gap-2">
                         <span class="w-1.5 h-6 bg-blue-400 rounded-full"></span>
-                        {% trans 'Mapa de Currículo' %}
+                        Mapa de Currículo
                     </h2>
                     <div class="text-slate-300 font-mono text-sm leading-relaxed whitespace-pre-wrap bg-slate-950/60 p-6 rounded-xl border border-slate-800">
                         {{ course.curriculum_map }}
@@ -91,7 +93,7 @@
             {% endif %}
             <!-- Categories -->
             <div class="pt-8 border-t border-slate-800">
-                <h3 class="text-sm font-mono text-slate-400 uppercase tracking-wider mb-3">{% trans 'Categorias & Tópicos' %}</h3>
+                <h3 class="text-sm font-mono text-slate-400 uppercase tracking-wider mb-3">Categorias & Tópicos</h3>
                 <div class="flex flex-wrap gap-2">
                     {% for category in course.categories.all %}
                         <span class="px-3 py-1.5 rounded-lg bg-slate-900 text-cyan-300 border border-slate-800 text-xs font-medium flex items-center gap-1.5">

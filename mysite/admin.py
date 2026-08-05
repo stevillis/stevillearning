@@ -1,7 +1,6 @@
 """Admin configuration for the models."""
 
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
 
 from mysite.models import Category, Certification, Course, Formation, Institution
 
@@ -91,10 +90,10 @@ class CourseAdmin(admin.ModelAdmin):
         "institution",
     )
     list_filter = [
-        ("institution", custom_titled_filter(_("Institution"))),
-        ("formation", custom_titled_filter(_("Formation"))),
-        ("categories", custom_titled_filter(_("Category"))),
-        ("is_active", custom_titled_filter(_("Is Active"))),
+        ("institution", custom_titled_filter("Institution")),
+        ("formation", custom_titled_filter("Formation")),
+        ("categories", custom_titled_filter("Category")),
+        ("is_active", custom_titled_filter("Is Active")),
     ]
     search_fields = ["name"]
     list_select_related = ["institution"]
@@ -128,9 +127,9 @@ class CertificationAdmin(admin.ModelAdmin):
         "updated_at",
     )
     list_filter = [
-        ("institution", custom_titled_filter(_("Institution"))),
-        ("categories", custom_titled_filter(_("Category"))),
-        ("is_active", custom_titled_filter(_("Is Active"))),
+        ("institution", custom_titled_filter("Institution")),
+        ("categories", custom_titled_filter("Category")),
+        ("is_active", custom_titled_filter("Is Active")),
     ]
     search_fields = ["name", "credential_id"]
     list_select_related = ["institution"]
