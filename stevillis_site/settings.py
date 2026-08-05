@@ -11,28 +11,52 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
 
+import environ
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+env = environ.Env(
+    DEBUG=(bool, True),
+    STEVILLIS_SITE_RUNNING_LOCAL=(bool, False),
+)
+
+# Take environment variables from .env file
+env_file = BASE_DIR / ".env"
+if env_file.exists():
+    environ.Env.read_env(env_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("STEVILLIS_SITE_SECRET_KEY")
+SECRET_KEY = env(
+    "SECRET_KEY",
+    default=env(
+        "STEVILLIS_SITE_SECRET_KEY",
+        default="django-insecure-key-for-dev-and-docker-build",
+    ),
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("STEVILLIS_SITE_DEBUG", False)
-RUNNING_LOCAL = os.getenv("STEVILLIS_SITE_RUNNING_LOCAL", False)
+DEBUG = env.bool("DEBUG", default=True)
+RUNNING_LOCAL = env.bool("STEVILLIS_SITE_RUNNING_LOCAL", default=False)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=[
+        "learning.stevillis.com.br",
+        "stevillis.up.railway.app",
+        "localhost",
+        "127.0.0.1",
+    ],
+)
 
 # In Django 4.0+, you must explicitly specify trusted origins for CSRF if you are behind a proxy
 CSRF_TRUSTED_ORIGINS = [
+    "https://learning.stevillis.com.br",
+    "http://learning.stevillis.com.br",
     "https://stevillis.up.railway.app",
 ]
 
@@ -49,6 +73,17 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "mysite",
+    "tailwind",
+    "theme",
+]
+
+if DEBUG:
+    INSTALLED_APPS += ["django_browser_reload"]
+
+TAILWIND_APP_NAME = "theme"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -62,6 +97,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+if DEBUG:
+    MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
 ROOT_URLCONF = "stevillis_site.urls"
 
@@ -87,26 +125,19 @@ WSGI_APPLICATION = "stevillis_site.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG and RUNNING_LOCAL:
-    default_database = {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "stevillis",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+if env("DATABASE_URL", default=None):
+    DATABASES = {"default": env.db("DATABASE_URL")}
 else:
-    default_database = {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("PGDATABASE"),
-        "USER": os.getenv("PGUSER"),
-        "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": os.getenv("PGHOST"),
-        "PORT": os.getenv("PGPORT"),
+    DATABASES = {
+        "default": {
+            "ENGINE": env("DB_ENGINE", default="django.db.backends.postgresql"),
+            "NAME": env("DB_NAME", default=env("PGDATABASE", default="stevillis")),
+            "USER": env("DB_USER", default=env("PGUSER", default="postgres")),
+            "PASSWORD": env("DB_PASSWORD", default=env("PGPASSWORD", default="postgres")),
+            "HOST": env("DB_HOST", default=env("PGHOST", default="127.0.0.1")),
+            "PORT": env("DB_PORT", default=env("PGPORT", default="5432")),
+        }
     }
-
-DATABASES = {"default": default_database}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -147,9 +178,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_FILE_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 
 # MEDIA_URL = "/media/"
