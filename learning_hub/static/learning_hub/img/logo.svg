@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Cyan & Neon Blue Electric Gradients -->
+    <linearGradient id="cap-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <linearGradient id="cap-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0369A1" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="s-main-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="40%" stop-color="#00F2FE" />
+      <stop offset="80%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+
+    <linearGradient id="s-inner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#00F2FE" />
+    </linearGradient>
+
+    <!-- Neon Glow Filters -->
+    <filter id="glow-light" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="shadow-drop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0284C7" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Group 1: Graduation Cap (Mortarboard) -->
+  <g filter="url(#shadow-drop)">
+    <!-- Top Mortarboard Diamond -->
+    <polygon points="256,38 468,106 256,174 44,106" fill="url(#cap-gradient)" />
+
+    <!-- Bevel 3D Bottom Edge of Diamond -->
+    <polygon points="256,174 468,106 468,114 256,182 44,114 44,106" fill="#0284C7" opacity="0.9" />
+
+    <!-- Cap Skullband Base -->
+    <path d="M 160,146 Q 256,186 352,146 L 352,182 Q 256,222 160,182 Z" fill="url(#cap-dark)" stroke="#38BDF8" stroke-width="2" />
+
+    <!-- Tassel Button & Ribbon -->
+    <ellipse cx="256" cy="106" rx="9" ry="5" fill="#E0F2FE" />
+    <path d="M 256,106 Q 370,116 422,180" fill="none" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round" />
+    <ellipse cx="422" cy="184" rx="5" ry="3" fill="#38BDF8" />
+    <polygon points="418,186 426,186 430,226 414,226" fill="#00F2FE" />
+  </g>
+
+  <!-- Group 2: Futuristic Solid Tech 'S' Ribbon (No gaps, no blank lines) -->
+  <g filter="url(#glow-light)">
+    <!-- Main Outer Solid 'S' Body -->
+    <path d="
+      M 345,212
+      L 210,212
+      C 145,212 145,292 210,312
+      L 302,338
+      C 367,358 367,438 302,458
+      L 165,458
+    " fill="none" stroke="url(#s-main-grad)" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Inner Bright Core Ribbon Accent -->
+    <path d="
+      M 345,212
+      L 210,212
+      C 145,212 145,292 210,312
+      L 302,338
+      C 367,358 367,438 302,458
+      L 165,458
+    " fill="none" stroke="url(#s-inner-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+
+    <!-- Tech Circuit Traces & Nodes inside/around the S -->
+    <!-- Top Bar Circuit Track -->
+    <path d="M 190,212 L 270,212 L 295,237 L 295,260" fill="none" stroke="#E0F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="190" cy="212" r="5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="295" cy="260" r="4.5" fill="#38BDF8" />
+
+    <!-- Central Diagonal Circuit Network -->
+    <path d="M 235,320 L 275,330 L 275,360 L 310,360" fill="none" stroke="#00F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="235" cy="320" r="4.5" fill="#7DD3FC" />
+    <circle cx="310" cy="360" r="5.5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="1.5" />
+
+    <!-- Bottom Circuit Track -->
+    <path d="M 320,458 L 240,458 L 215,433 L 215,410" fill="none" stroke="#E0F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="320" cy="458" r="5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="215" cy="410" r="4.5" fill="#38BDF8" />
+
+    <!-- Decorative Tech Sparkle Nodes -->
+    <circle cx="160" cy="345" r="4" fill="#00F2FE" />
+    <circle cx="352" cy="325" r="4" fill="#7DD3FC" />
+  </g>
+</svg>
