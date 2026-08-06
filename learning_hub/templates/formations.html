@@ -18,11 +18,10 @@
         {% for formation in formations_qs %}
             <div class="space-y-6" id="formation-{{ formation.pk }}">
                 <!-- Formation Header Panel -->
-                <div class="glass-panel p-8 border-glow-blue relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-36 h-36 bg-blue-500/5 rounded-bl-full pointer-events-none"></div>
+                <div class="glass-panel p-8 relative">
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                         <div>
-                            <h2 class="text-3xl font-outfit font-black text-white group-hover:text-blue-400 transition-colors">{{ formation }}</h2>
+                            <h2 class="text-3xl font-black text-white group-hover:text-blue-400 transition-colors">{{ formation }}</h2>
                             {% if formation.courses.first.institution %}
                                 <p class="text-sm font-mono text-cyan-400 mt-1 flex items-center gap-1.5">
                                     <i class="bi bi-building"></i> {{ formation.courses.first.institution.name }}
@@ -30,10 +29,10 @@
                             {% endif %}
                         </div>
                         <div class="flex flex-wrap items-center gap-3">
-                            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/30 text-xs font-semibold font-mono flex items-center gap-1.5">
+                            <span class="badge-blue flex items-center gap-1.5">
                                 <i class="bi bi-journal-check"></i> {{ formation.courses.count }} cursos
                             </span>
-                            <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-semibold font-mono flex items-center gap-1.5">
+                            <span class="badge-amber flex items-center gap-1.5">
                                 <i class="bi bi-clock"></i>
                                 {% if formation.workload %}
                                     {{ formation.workload }}
@@ -64,7 +63,7 @@
                 <!-- Courses Grid within Formation -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 select-none pl-0 md:pl-4">
                     {% for course in formation.courses.all %}
-                        <div class="glass-panel border-glow-cyan p-6 flex flex-col justify-between group">
+                        <div class="glass-panel p-6 flex flex-col justify-between group">
                             <div>
                                 <!-- Header Badges -->
                                 <div class="flex items-center justify-between gap-2 mb-3">
@@ -81,7 +80,7 @@
                                         </span>
                                     {% endif %}
                                 </div>
-                                <h3 class="text-lg font-outfit font-bold text-white mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                                <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                                     {{ course.name }}
                                 </h3>
                                 <p class="text-slate-400 text-xs line-clamp-3 mb-4 leading-relaxed">
@@ -91,14 +90,14 @@
                                     <div class="mb-4">
                                         <div class="flex flex-wrap gap-1">
                                             {% for category in course.categories.all %}
-                                                <span class="px-2 py-0.5 rounded bg-slate-800 text-cyan-300 text-xs font-medium">{{ category.name }}</span>
+                                                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-xs font-medium">{{ category.name }}</span>
                                             {% endfor %}
                                         </div>
                                     </div>
                                 {% endif %}
                             </div>
                             <a href="{% url 'course' course.pk %}"
-                               class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-slate-950 text-cyan-400 border border-cyan-500/30 font-outfit font-bold text-xs transition-all duration-200 text-center flex items-center justify-center gap-1.5 group/btn mt-auto">
+                               class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 font-bold text-xs transition-colors text-center flex items-center justify-center gap-1.5 group/btn mt-auto">
                                 <span>Ver Detalhes</span>
                                 <i class="bi bi-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
                             </a>

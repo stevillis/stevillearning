@@ -18,8 +18,7 @@
             </a>
         </div>
         <!-- Course Header Card -->
-        <div class="glass-panel p-8 mb-8 border border-slate-800 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-bl-full pointer-events-none"></div>
+        <div class="glass-panel p-8 mb-8 relative">
             <div class="flex flex-wrap items-center gap-3 mb-4">
                 <span class="badge-cyan font-mono flex items-center gap-1.5 text-xs">
                     <i class="bi bi-clock"></i> {{ course.workload }} horas
@@ -60,8 +59,8 @@
                     <div class="flex flex-wrap gap-2">
                         {% for formation in course.formation.all %}
                             <a href="{% link_to_formation_section 'formations' formation.pk %}"
-                               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 text-sm font-semibold transition-all">
-                                <i class="bi bi-mortarboard"></i>
+                               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 text-sm font-semibold transition-colors">
+                                <i class="bi bi-mortarboard text-slate-400"></i>
                                 <span>{{ formation.name }}</span>
                             </a>
                         {% endfor %}
@@ -70,23 +69,17 @@
             {% endif %}
         </div>
         <!-- Course Description & Content Section -->
-        <div class="glass-panel p-8 mb-8 border border-slate-800 space-y-8">
+        <div class="glass-panel p-8 mb-8 space-y-8">
             <!-- Description -->
             <div>
-                <h2 class="text-xl font-outfit font-bold text-white mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-6 bg-cyan-400 rounded-full"></span>
-                    Descrição do Curso
-                </h2>
+                <h2 class="text-xl font-bold text-white mb-4">Descrição do Curso</h2>
                 <div class="text-slate-300 text-base leading-relaxed space-y-4">{{ course.description|linebreaks }}</div>
             </div>
             <!-- Curriculum Map -->
             {% if course.curriculum_map %}
                 <div class="pt-8 border-t border-slate-800">
-                    <h2 class="text-xl font-outfit font-bold text-white mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-6 bg-blue-400 rounded-full"></span>
-                        Mapa de Currículo
-                    </h2>
-                    <div class="text-slate-300 font-mono text-sm leading-relaxed whitespace-pre-wrap bg-slate-950/60 p-6 rounded-xl border border-slate-800">
+                    <h2 class="text-xl font-bold text-white mb-4">Mapa de Currículo</h2>
+                    <div class="text-slate-300 font-mono text-sm leading-relaxed whitespace-pre-wrap bg-slate-950 p-6 rounded-xl border border-slate-800">
                         {{ course.curriculum_map }}
                     </div>
                 </div>

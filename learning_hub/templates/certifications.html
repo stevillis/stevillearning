@@ -16,7 +16,7 @@
     <div class="max-w-6xl mx-auto mb-12">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 select-none">
             {% for cert in certifications %}
-                <div class="glass-panel border-glow-emerald p-6 flex flex-col justify-between group">
+                <div class="glass-panel p-6 flex flex-col justify-between group">
                     <div>
                         <!-- Header Badges -->
                         <div class="flex items-center justify-between gap-2 mb-3">
@@ -30,7 +30,7 @@
                             {% endif %}
                         </div>
                         <!-- Certification Name -->
-                        <h3 class="text-xl font-outfit font-bold text-white mb-2 line-clamp-2 group-hover:text-emerald-400 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-emerald-400 transition-colors">
                             {{ cert.name }}
                         </h3>
                         <!-- Institution -->
@@ -50,7 +50,7 @@
                                 <span class="text-xs font-mono text-slate-500 uppercase block mb-1.5">Categorias</span>
                                 <div class="flex flex-wrap gap-1.5">
                                     {% for category in cert.categories.all %}
-                                        <span class="px-2 py-0.5 rounded-md bg-slate-800 text-emerald-300 border border-slate-700 text-xs font-medium">
+                                        <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 text-xs font-medium">
                                             {{ category.name }}
                                         </span>
                                     {% endfor %}
@@ -58,7 +58,7 @@
                             </div>
                         {% endif %}
                         <!-- Dates -->
-                        <div class="grid grid-cols-2 gap-2 text-xs py-3 border-t border-slate-800/80 mb-4">
+                        <div class="grid grid-cols-2 gap-2 text-xs py-3 border-t border-slate-800 mb-4">
                             <div>
                                 <span class="text-slate-500 block">Emissão</span>
                                 <span class="text-emerald-400 font-semibold font-mono">{{ cert.issue_date }}</span>
@@ -81,13 +81,13 @@
                             <a href="{{ cert.credential_url }}"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="w-full py-2 px-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-all text-center flex items-center justify-center gap-1.5">
+                               class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-800 text-xs font-semibold transition-colors text-center flex items-center justify-center gap-1.5">
                                 <i class="bi bi-box-arrow-up-right"></i>
                                 <span>Ver Credencial Oficial</span>
                             </a>
                         {% endif %}
                         <a href="{% url 'certification' cert.pk %}"
-                           class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-emerald-500 hover:text-slate-950 text-emerald-400 border border-emerald-500/30 font-outfit font-bold text-sm transition-all duration-200 text-center flex items-center justify-center gap-2 group/btn">
+                           class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 hover:border-slate-700 font-bold text-sm transition-colors text-center flex items-center justify-center gap-2 group/btn">
                             <span>Ver Detalhes</span>
                             <i class="bi bi-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
                         </a>

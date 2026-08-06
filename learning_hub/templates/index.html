@@ -9,19 +9,19 @@
     <!-- Hero Section -->
     <section class="relative py-12 md:py-16 text-center max-w-4xl mx-auto">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-6 leading-tight">
-            Gestão de Aprendizado e <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400">Trajetória Técnica</span>
+            Gestão de Aprendizado e <span class="text-cyan-400">Trajetória Técnica</span>
         </h1>
         <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8 text-justify">
             Registro centralizado dos meus cursos, certificações técnicas e formações acadêmicas. Acompanhe a evolução da minha jornada de aprendizado e evolução técnica.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
             <a href="{% url 'courses' %}"
-               class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-outfit font-bold text-sm transition-all shadow-lg shadow-cyan-500/20 hover:scale-105 flex items-center gap-2">
+               class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-colors flex items-center gap-2">
                 <i class="bi bi-book-half"></i>
                 <span>Ver Cursos</span>
             </a>
             <a href="{% url 'certifications' %}"
-               class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-outfit font-bold text-sm transition-all hover:scale-105 flex items-center gap-2">
+               class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-bold text-sm transition-colors flex items-center gap-2">
                 <i class="bi bi-patch-check text-emerald-400"></i>
                 <span>Ver Certificações</span>
             </a>
@@ -32,105 +32,91 @@
         <!-- Summary Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <!-- Total Courses Card -->
-            <div class="glass-panel p-6 border-glow-cyan relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-bl-full pointer-events-none"></div>
+            <div class="glass-panel p-6 relative group">
                 <div class="flex items-center justify-between mb-4">
                     <span class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">Total de Cursos</span>
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400">
                         <i class="bi bi-journal-bookmark text-xl"></i>
                     </div>
                 </div>
-                <div class="text-4xl md:text-5xl font-outfit font-extrabold text-white mb-1 group-hover:text-cyan-400 transition-colors">
-                    {{ total_courses }}
-                </div>
-                <div class="text-xs text-cyan-400/80 font-medium">Cursos catalogados</div>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">{{ total_courses }}</div>
             </div>
             <!-- Formations Card -->
-            <div class="glass-panel p-6 border-glow-blue relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-full pointer-events-none"></div>
+            <div class="glass-panel p-6 relative group">
                 <div class="flex items-center justify-between mb-4">
                     <span class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">Formações</span>
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-blue-400">
                         <i class="bi bi-mortarboard text-xl"></i>
                     </div>
                 </div>
-                <div class="text-4xl md:text-5xl font-outfit font-extrabold text-white mb-1 group-hover:text-blue-400 transition-colors">
-                    {{ total_formations }}
-                </div>
-                <div class="text-xs text-blue-400/80 font-medium">Trilhas de Especialização</div>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">{{ total_formations }}</div>
             </div>
             <!-- Certifications Card -->
-            <div class="glass-panel p-6 border-glow-emerald relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full pointer-events-none"></div>
+            <div class="glass-panel p-6 relative group">
                 <div class="flex items-center justify-between mb-4">
                     <span class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">Certificações</span>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-emerald-400">
                         <i class="bi bi-patch-check text-xl"></i>
                     </div>
                 </div>
-                <div class="text-4xl md:text-5xl font-outfit font-extrabold text-white mb-1 group-hover:text-emerald-400 transition-colors">
-                    {{ total_certifications }}
-                </div>
-                <div class="text-xs text-emerald-400/80 font-medium">Credenciais Verificadas</div>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">{{ total_certifications }}</div>
             </div>
             <!-- Total Hours Card -->
-            <div class="glass-panel p-6 border-glow-amber relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-full pointer-events-none"></div>
+            <div class="glass-panel p-6 relative group">
                 <div class="flex items-center justify-between mb-4">
                     <span class="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">Horas de Estudo</span>
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
                         <i class="bi bi-clock-history text-xl"></i>
                     </div>
                 </div>
-                <div class="text-4xl md:text-5xl font-outfit font-extrabold text-white mb-1 group-hover:text-amber-400 transition-colors">
-                    {{ total_hours }}<span class="text-2xl text-slate-400 font-normal">h</span>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-1">
+                    {{ total_hours|floatformat:0 }}<span class="text-2xl text-slate-400 font-normal">h</span>
                 </div>
-                <div class="text-xs text-amber-400/80 font-medium">Carga horária acumulada</div>
             </div>
         </div>
         <!-- Progress Visualization Panel -->
-        <div class="glass-panel p-8 mb-10 border border-slate-800">
+        <div class="glass-panel p-8 mb-10">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <div class="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-emerald-400">
                         <i class="bi bi-bar-chart-line text-lg"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-outfit font-bold text-white">Progresso de Aprendizado</h3>
+                        <h3 class="text-lg font-bold text-white">Progresso de Aprendizado</h3>
                     </div>
                 </div>
             </div>
             <!-- Stats breakdown summary -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950/60 p-6 rounded-xl border border-slate-800/80">
-                <div class="flex items-center justify-between p-4 rounded-lg bg-slate-900/80 border border-emerald-500/20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-6 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between p-4 rounded-lg bg-slate-900 border border-slate-800">
                     <div class="flex items-center gap-3">
                         <i class="bi bi-check-circle-fill text-2xl text-emerald-400"></i>
                         <div>
                             <span class="text-xs font-mono uppercase text-slate-400 block">Cursos Concluídos</span>
-                            <span class="text-2xl font-outfit font-bold text-white">{{ courses_completed }}</span>
+                            <span class="text-2xl font-bold text-white">{{ courses_completed }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-4 rounded-lg bg-slate-900/80 border border-amber-500/20">
+                <div class="flex items-center justify-between p-4 rounded-lg bg-slate-900 border border-slate-800">
                     <div class="flex items-center gap-3">
-                        <i class="bi bi-arrow-repeat text-2xl text-amber-400 animate-spin-slow"></i>
+                        <i class="bi bi-arrow-repeat text-2xl text-amber-400"></i>
                         <div>
                             <span class="text-xs font-mono uppercase text-slate-400 block">Em Andamento</span>
-                            <span class="text-2xl font-outfit font-bold text-white">{{ courses_in_progress }}</span>
+                            <span class="text-2xl font-bold text-white">{{ courses_in_progress }}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Recent Activity Feed -->
-        <div class="glass-panel p-8 border border-slate-800">
+        <div class="glass-panel p-8">
             <div class="flex items-center justify-between mb-8">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                    <div class="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
                         <i class="bi bi-lightning-charge text-lg"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-outfit font-bold text-white">Atividades Recentes</h3>
+                        <h3 class="text-lg font-bold text-white">Atividades Recentes</h3>
                     </div>
                 </div>
             </div>
@@ -138,23 +124,23 @@
                 {% for activity in recent_activity %}
                     <a href="{% if activity.type == 'Curso' %}{% url 'course' activity.id %}{% elif activity.type == 'Certificação' %}{% url 'certification' activity.id %}{% else %}{% url 'formations' %}{% endif %}"
                        class="block group">
-                        <div class="bg-slate-950/60 rounded-xl p-5 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-slate-900/80 transition-all duration-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                        <div class="bg-slate-950 rounded-xl p-5 border border-slate-800 hover:border-slate-700 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 {% if activity.type == 'Curso' %}bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 {% elif activity.type == 'Certificação' %}bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 {% else %}bg-blue-500/10 text-blue-400 border border-blue-500/20{% endif %}">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0 bg-slate-900 border border-slate-800 text-slate-300">
                                     {% if activity.type == 'Curso' %}
-                                        <i class="bi bi-book"></i>
+                                        <i class="bi bi-book text-cyan-400"></i>
                                     {% elif activity.type == 'Certificação' %}
-                                        <i class="bi bi-patch-check"></i>
+                                        <i class="bi bi-patch-check text-emerald-400"></i>
                                     {% else %}
-                                        <i class="bi bi-mortarboard"></i>
+                                        <i class="bi bi-mortarboard text-blue-400"></i>
                                     {% endif %}
                                 </div>
                                 <div>
-                                    <div class="font-outfit font-bold text-white text-base group-hover:text-cyan-400 transition-colors">
+                                    <div class="font-bold text-white text-base group-hover:text-cyan-400 transition-colors">
                                         {{ activity.description }}
                                     </div>
                                     <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-xs font-semibold px-2 py-0.5 rounded-full {% if activity.type == 'Certificação' %}bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 {% elif activity.type == 'Curso' %}bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 {% else %}bg-blue-500/10 text-blue-400 border border-blue-500/20{% endif %}">
+                                        <span class="{% if activity.type == 'Certificação' %}badge-emerald{% elif activity.type == 'Curso' %}badge-cyan{% else %}badge-blue{% endif %} text-xs font-semibold px-2 py-0.5 rounded-full">
                                             {{ activity.type }}
                                         </span>
                                         <span class="text-xs text-slate-400 font-mono">
