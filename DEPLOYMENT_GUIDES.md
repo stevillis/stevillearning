@@ -20,7 +20,6 @@ No ambiente de produção, configure as variáveis essenciais:
 
 ```env
 SECRET_KEY=sua_secret_key_de_producao_super_segura
-RUNNING_LOCAL=False
 DEBUG=False
 ALLOWED_HOSTS=learning.stevillis.com.br,127.0.0.1,localhost
 CSRF_TRUSTED_ORIGINS=https://learning.stevillis.com.br

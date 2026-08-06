@@ -18,10 +18,7 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(
-    DEBUG=(bool, True),
-    RUNNING_LOCAL=(bool, False),
-)
+env = environ.Env(DEBUG=(bool, True))
 
 # Take environment variables from .env file
 env_file = BASE_DIR / ".env"
@@ -30,21 +27,11 @@ if env_file.exists():
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env(
-    "SECRET_KEY",
-    default=env(
-        "LEARNING_HUB_SECRET_KEY",
-        default=env(
-            "STEVILLIS_SITE_SECRET_KEY",
-            default="django-insecure-key-for-dev-and-docker-build",
-        ),
-    ),
+    "SECRET_KEY", default=env("SECRET_KEY", default="django-insecure-key-for-dev-and-docker-build")
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=True)
-RUNNING_LOCAL = env.bool(
-    "RUNNING_LOCAL", default=env.bool("STEVILLIS_SITE_RUNNING_LOCAL", default=False)
-)
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
@@ -134,7 +121,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": env("DB_ENGINE", default="django.db.backends.postgresql"),
-            "NAME": env("DB_NAME", default=env("PGDATABASE", default="stevillis")),
+            "NAME": env("DB_NAME", default=env("PGDATABASE", default="stevillearning")),
             "USER": env("DB_USER", default=env("PGUSER", default="postgres")),
             "PASSWORD": env("DB_PASSWORD", default=env("PGPASSWORD", default="postgres")),
             "HOST": env("DB_HOST", default=env("PGHOST", default="127.0.0.1")),
