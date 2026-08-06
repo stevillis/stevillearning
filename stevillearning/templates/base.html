@@ -4,7 +4,8 @@
 <html lang="pt-br" class="dark scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="{% block description %}Registro centralizado dos cursos, certificações técnicas e formações em Ciência de Dados, IA e Software de Stévillis Sousa.{% endblock %}">
+        <meta name="description"
+              content="{% block description %}Registro centralizado dos cursos, certificações técnicas e formações em Ciência de Dados, IA e Software de Stévillis Sousa.{% endblock %}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
@@ -74,14 +75,6 @@
                             <i class="bi bi-patch-check text-emerald-400"></i>
                             <span>Certificações</span>
                         </a>
-                        <!-- External link to main portfolio & projects site -->
-                        <a href="https://stevillis.com.br"
-                           target="_blank"
-                           class="px-4 py-2 rounded-lg text-sm font-semibold text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all duration-200 flex items-center gap-2 ml-2">
-                            <i class="bi bi-code-slash"></i>
-                            <span>Projetos</span>
-                            <i class="bi bi-box-arrow-up-right text-xs"></i>
-                        </a>
                     </nav>
                     <!-- Mobile Hamburger Button -->
                     <div class="flex items-center md:hidden">
@@ -112,12 +105,6 @@
                 <a href="{% url 'certifications' %}"
                    class="block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-emerald-400 flex items-center gap-3">
                     <i class="bi bi-patch-check text-emerald-400 text-lg"></i> Certificações
-                </a>
-                <a href="https://stevillis.com.br"
-                   target="_blank"
-                   class="block px-4 py-3 rounded-xl text-base font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between">
-                    <span class="flex items-center gap-3"><i class="bi bi-code-slash text-lg"></i> Projetos (stevillis.com.br)</span>
-                    <i class="bi bi-box-arrow-up-right text-xs"></i>
                 </a>
             </div>
         </header>
