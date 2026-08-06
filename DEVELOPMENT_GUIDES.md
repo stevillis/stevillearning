@@ -227,10 +227,8 @@ uv run python manage.py compilemessages
 
 ---
 
-## 8. Backup do Banco de Dados
+## 8. Banco de Dados, Backups e Restauração
 
-Para realizar um backup (dump) do banco de dados remoto ou local PostgreSQL via `pg_dump`:
+Para instruções detalhadas sobre backup (dump), restauração (import), sincronização de migrações (`python manage.py migrate --fake`) e resolução de problemas comuns de banco de dados, consulte o guia dedicado:
 
-```bash
-pg_dump "postgresql://user:password@host:5432/dbname" -F c -f backup.dump
-```
+- 🗄️ [Guia de Operações de Banco de Dados (`DATABASE_GUIDES.md`)](DATABASE_GUIDES.md)

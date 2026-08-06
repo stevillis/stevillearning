@@ -88,7 +88,8 @@ uv run pre-commit install
 
 ## 📚 Guias de Referência
 
-- 📖 [Guia de Desenvolvimento Local (`DEVELOPMENT_GUIDES.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DEVELOPMENT_GUIDES.md)
-- 🚀 [Guia de Deploy em Produção (`DEPLOYMENT_GUIDES.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DEPLOYMENT_GUIDES.md)
-- 🎯 [Visão do Produto (`PRODUCT.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/PRODUCT.md)
-- 🎨 [Diretrizes de Design (`DESIGN.md`)](file:///c:/Users/stevi/Desktop/projetos/stevillis/stevillearning/DESIGN.md)
+- 📖 [Guia de Desenvolvimento Local (`DEVELOPMENT_GUIDES.md`)](DEVELOPMENT_GUIDES.md)
+- 🚀 [Guia de Deploy em Produção (`DEPLOYMENT_GUIDES.md`)](DEPLOYMENT_GUIDES.md)
+- 🗄️ [Guia de Banco de Dados & Backups (`DATABASE_GUIDES.md`)](DATABASE_GUIDES.md)
+- 🎯 [Visão do Produto (`PRODUCT.md`)](PRODUCT.md)
+- 🎨 [Diretrizes de Design (`DESIGN.md`)](DESIGN.md)
