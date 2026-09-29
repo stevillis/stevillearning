@@ -232,3 +232,56 @@ uv run python manage.py compilemessages
 Para instruções detalhadas sobre backup (dump), restauração (import), sincronização de migrações (`python manage.py migrate --fake`) e resolução de problemas comuns de banco de dados, consulte o guia dedicado:
 
 - 🗄️ [Guia de Operações de Banco de Dados (`DATABASE_GUIDES.md`)](DATABASE_GUIDES.md)
+
+---
+
+## 9. Sincronização e Webhook com stevillis.com.br (RAG Chatbot)
+
+O `stevillearning` sincroniza automaticamente cursos e certificações com o site de portfólio `stevillis.com.br` para alimentar a base de vetores (pgvector) do assistente de IA (MarIA).
+
+### Geração de Chaves e Segredos
+
+#### 1. Gerar a Chave Secreta do Webhook (`STEVILLIS_WEBHOOK_SECRET`)
+
+Para que o `stevillearning` envie webhooks autenticados (com assinatura HMAC-SHA256) para o `stevillis.com.br`:
+
+```bash
+python -c "import secrets; print(secrets.token_urlsafe())"
+```
+
+Configure a chave resultante no `.env`:
+
+- No `stevillearning/.env`:
+
+  ```env
+  STEVILLIS_WEBHOOK_URL=http://127.0.0.1:8001/api/webhooks/learning-hub/
+  STEVILLIS_WEBHOOK_SECRET=sua_chave_gerada_aqui
+  ```
+
+- No `stevillis.com.br/.env`:
+
+  ```env
+  LEARNING_HUB_WEBHOOK_SECRET=sua_chave_gerada_aqui
+  ```
+
+#### 2. Gerar JWT Token para Sincronização Manual via CLI
+
+Se preferir ou precisar rodar a sincronização completa manualmente através do management command `sync_learning_hub` do `stevillis.com.br`:
+
+- **Via Django Shell (Mais rápido — não exige digitar senha):**
+
+  ```bash
+  uv run python manage.py shell -c "from rest_framework_simplejwt.tokens import RefreshToken; from django.contrib.auth import get_user_model; u = get_user_model().objects.filter(is_superuser=True).first(); print(str(RefreshToken.for_user(u).access_token))"
+  ```
+
+- **Via cURL / HTTP POST para `/api/token/`:**
+
+  ```bash
+  curl -X POST http://127.0.0.1:8000/api/token/ \
+    -H "Content-Type: application/json" \
+    -d '{"username": "seu_admin", "password": "sua_password"}'
+  ```
+
+#### 3. Sincronização sob Demanda pelo Django Admin
+
+No Django Admin (`/admin/`), ao visualizar a listagem de Cursos ou Certificações, você pode selecionar os itens desejados e escolher a ação **"Sync selected items to stevillis.com.br (RAG)"** no menu dropdown de ações em massa para sincronizá-los imediatamente sem precisar acessar o terminal.

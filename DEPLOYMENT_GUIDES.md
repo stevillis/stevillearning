@@ -40,6 +40,46 @@ STEVILLIS_WEBHOOK_URL=https://stevillis.com.br/api/webhooks/learning-hub/
 STEVILLIS_WEBHOOK_SECRET=sua_webhook_secret_compartilhada
 ```
 
+### Como gerar as chaves e segredos
+
+#### 1. Gerar a SECRET_KEY do Django
+
+Execute no terminal:
+
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(50))"
+# ou
+uv run python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+#### 2. Gerar a STEVILLIS_WEBHOOK_SECRET (Webhook Secret)
+
+Esta chave compartilhada autentica os envios de webhook entre o `stevillearning` e o `stevillis.com.br`:
+
+```bash
+python -c "import secrets; print(secrets.token_urlsafe())"
+```
+
+> [!IMPORTANT]
+> Defina exatamente o mesmo valor em `STEVILLIS_WEBHOOK_SECRET` (no `.env` do `stevillearning`) e em `LEARNING_HUB_WEBHOOK_SECRET` (no `.env` do `stevillis.com.br`).
+
+#### 3. Gerar JWT Token para Sincronização Manual
+
+Caso precise de um token JWT para executar o comando `python manage.py sync_learning_hub` manualmente a partir do `stevillis.com.br`:
+
+```bash
+# Executar no servidor/container do stevillearning:
+uv run python manage.py shell -c "from rest_framework_simplejwt.tokens import RefreshToken; from django.contrib.auth import get_user_model; u = get_user_model().objects.filter(is_superuser=True).first(); print(str(RefreshToken.for_user(u).access_token))"
+```
+
+Ou via requisição HTTP POST para `/api/token/`:
+
+```bash
+curl -X POST https://learning.stevillis.com.br/api/token/ \
+  -H "Content-Type: application/json" \
+  -d '{"username": "seu_admin", "password": "sua_password"}'
+```
+
 ---
 
 ## 2. Build da Imagem Docker, Segurança (CVEs) e Envio para o Docker Hub
