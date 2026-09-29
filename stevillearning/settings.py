@@ -195,3 +195,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
+
+# Stevillis Webhook (RAG Sync)
+STEVILLIS_WEBHOOK_URL = env("STEVILLIS_WEBHOOK_URL", default="")
+STEVILLIS_WEBHOOK_SECRET = env("STEVILLIS_WEBHOOK_SECRET", default="")

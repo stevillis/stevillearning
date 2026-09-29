@@ -5,12 +5,14 @@ from .models import Certification, Course
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     url = serializers.SerializerMethodField()
     institution = serializers.StringRelatedField()
 
     class Meta:
         model = Course
         fields = [
+            "id",
             "name",
             "workload",
             "description",
@@ -28,12 +30,14 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class CertificationSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     url = serializers.SerializerMethodField()
     institution = serializers.StringRelatedField()
 
     class Meta:
         model = Certification
         fields = [
+            "id",
             "name",
             "workload",
             "description",

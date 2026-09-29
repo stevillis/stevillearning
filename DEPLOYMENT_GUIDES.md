@@ -1,4 +1,4 @@
-﻿# Deployment Guide - Stévillis Learning Hub
+# Deployment Guide - Stévillis Learning Hub
 
 Este guia descreve os processos para implantação da aplicação em ambiente de produção (Docker / VPS / Railway / PaaS) utilizando o banco de dados PostgreSQL.
 
@@ -34,6 +34,10 @@ DATABASE_URL=postgresql://postgres.YOUR_REF:YOUR_PASSWORD@aws-0-sa-east-1.pooler
 # DB_PASSWORD=sua_senha
 # DB_HOST=seu_host_postgresql
 # DB_PORT=5432
+
+# Sincronização Automática via Webhook (RAG em stevillis.com.br)
+STEVILLIS_WEBHOOK_URL=https://stevillis.com.br/api/webhooks/learning-hub/
+STEVILLIS_WEBHOOK_SECRET=sua_webhook_secret_compartilhada
 ```
 
 ---

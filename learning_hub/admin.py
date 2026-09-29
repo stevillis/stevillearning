@@ -1,8 +1,9 @@
 """Admin configuration for the models."""
 
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from learning_hub.models import Category, Certification, Course, Formation, Institution
+from learning_hub.services.webhook_service import build_payload, send_webhook
 
 
 def custom_titled_filter(title):
@@ -17,6 +18,28 @@ def custom_titled_filter(title):
             return instance
 
     return Wrapper
+
+
+@admin.action(description="Sync selected items to stevillis.com.br (RAG)")
+def sync_selected_to_rag(modeladmin, request, queryset):
+    """Admin action to trigger manual RAG sync for selected items."""
+    success_count = 0
+    failure_count = 0
+    for item in queryset:
+        action = "delete" if getattr(item, "is_active", True) is False else "upsert"
+        payload = build_payload(item, action=action)
+        if send_webhook(payload):
+            success_count += 1
+        else:
+            failure_count += 1
+
+    if success_count > 0:
+        messages.success(request, f"Successfully triggered sync for {success_count} item(s).")
+    if failure_count > 0:
+        messages.warning(
+            request,
+            f"Failed to sync {failure_count} item(s). Check server logs and webhook configuration.",
+        )
 
 
 @admin.register(Category)
@@ -99,6 +122,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_select_related = ["institution"]
     autocomplete_fields = ["institution", "categories", "formation"]
     ordering = ["-end_date"]
+    actions = [sync_selected_to_rag]
 
 
 @admin.register(Certification)
@@ -135,3 +159,4 @@ class CertificationAdmin(admin.ModelAdmin):
     list_select_related = ["institution"]
     autocomplete_fields = ["institution", "categories"]
     ordering = ["-issue_date"]
+    actions = [sync_selected_to_rag]
