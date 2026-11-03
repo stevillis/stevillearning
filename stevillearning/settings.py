@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "learning_hub",
+    "accounts",
+    "axes",
     "tailwind",
     "theme",
 ]
@@ -78,6 +80,11 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "accounts.backends.AxesBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -87,10 +94,25 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 ]
 
 if DEBUG:
     MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
+
+# Axes Security Configuration
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 0.25  # 15 minutes (0.25 hours)
+AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
+AXES_RESET_ON_SUCCESS = True
+AXES_RESET_ON_ALL_SUCCESS = True
+AXES_CLIENT_IP_CALLABLE = "accounts.utils.get_client_ip"
+AXES_LOCKOUT_TEMPLATE = "accounts/lockout.html"
+
+# Authentication Redirects
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "accounts:login"
 
 ROOT_URLCONF = "stevillearning.urls"
 

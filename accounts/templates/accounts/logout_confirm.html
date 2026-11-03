@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Encerrar Sessão{% endblock %}
+{% block content %}
+    <div class="flex flex-col justify-center min-h-[calc(100vh-16rem)] py-10 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0 text-center">
+            <div class="flex justify-center mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center shadow-lg shadow-black/40">
+                    <i class="bi bi-box-arrow-right text-3xl text-cyan-400"></i>
+                </div>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Encerrar Sessão</h2>
+            <p class="mt-2 text-sm text-slate-400">Tem certeza de que deseja sair da sua conta?</p>
+        </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-slate-900/90 border border-slate-800 py-8 px-6 sm:px-10 rounded-2xl shadow-xl shadow-black/40 backdrop-blur-sm text-center">
+                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-amber-400 mb-4">
+                    <i class="bi bi-question-lg text-2xl"></i>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-400 mb-6">
+                    Você precisará informar suas credenciais novamente para acessar o conteúdo restrito.
+                </p>
+                <form method="post"
+                      action="{% url 'accounts:logout' %}"
+                      class="flex flex-col sm:flex-row gap-3">
+                    {% csrf_token %}
+                    <a href="{% url 'index' %}"
+                       class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-slate-700 rounded-xl text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-slate-500 transition-all">
+                        Cancelar
+                    </a>
+                    <button type="submit"
+                            class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-red-600 hover:bg-red-500 shadow-lg shadow-red-600/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-red-500 active:scale-[0.98] transition-all">
+                        Confirmar Sair
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -118,11 +118,11 @@
                     </a>
                     <a href="?page={{ formations_qs.previous_page_number }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
-                        &laquo; Anterior
+                        « Anterior
                     </a>
                 {% else %}
                     <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Primeira</span>
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">&laquo; Anterior</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">« Anterior</span>
                 {% endif %}
                 <!-- Page numbers -->
                 <div class="flex gap-1.5">
@@ -140,14 +140,14 @@
                 {% if formations_qs.has_next %}
                     <a href="?page={{ formations_qs.next_page_number }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
-                        Próxima &raquo;
+                        Próxima »
                     </a>
                     <a href="?page={{ formations_qs.paginator.num_pages }}"
                        class="px-3.5 py-2 bg-slate-900 text-slate-300 border border-slate-800 rounded-lg hover:border-blue-500/50 hover:text-blue-400 transition-colors text-sm font-medium">
                         Última
                     </a>
                 {% else %}
-                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Próxima &raquo;</span>
+                    <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Próxima »</span>
                     <span class="px-3.5 py-2 bg-slate-900/50 text-slate-600 border border-slate-800/50 rounded-lg text-sm cursor-not-allowed opacity-50">Última</span>
                 {% endif %}
             </div>

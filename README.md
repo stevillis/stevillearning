@@ -10,6 +10,7 @@ Sistema de gestão de trajetória técnica, registro de cursos, certificações 
 - 🎓 **Gestão Completa de Cursos, Formações e Certificações**: Registro, visualização e acompanhamento detalhado de histórico acadêmico e técnico.
 - 🌐 **Internacionalização Completa (i18n)**: Suporte bilíngue (Português `pt-BR` e Inglês `en`) com persistência de idioma.
 - ⚡ **API REST & Autenticação JWT**: Endpoints padronizados com Django REST Framework (`djangorestframework`) e autenticação via `djangorestframework-simplejwt`.
+- 🔒 **Autenticação Web & Proteção Brute-Force**: Controle de acesso por sessão com decorators `@login_required`, interface de login/logout moderna e mitigação de ataques de força bruta via `django-axes` e `django-ipware`.
 - 🎨 **Interface Moderna & Responsiva**: Design escuro glassmórfico em Tailwind CSS v4 Standalone (compilação rápida sem necessidade de Node.js).
 - ⚡ **Desenvolvimento com Hot Reload**: Recarregamento automático dos templates e CSS via `django-browser-reload`.
 - 📦 **Gerenciamento de Dependências Moderno (`uv`)**: Resolução de dependências extremamente rápida e reprodutível via `pyproject.toml`.
@@ -41,6 +42,11 @@ cp .env-example .env
 
 # Executar as migrações do banco de dados
 uv run python manage.py migrate
+
+# Criar superusuário administrativo (necessário para login no Learning Hub)
+uv run python manage.py createsuperuser
+# Ou via Docker Compose:
+# docker compose exec web python manage.py createsuperuser
 ```
 
 ### 3. Compilar o Tailwind CSS (Standalone)

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 
@@ -9,6 +10,7 @@ from learning_hub.services import (
 )
 
 
+@login_required
 def index(request):
     """Render the index page with dashboard statistics and recent activity."""
     stats = dashboard_service.get_dashboard_stats()
@@ -18,12 +20,14 @@ def index(request):
     return render(request, "index.html", context)
 
 
+@login_required
 def projects(request):
     """Render the projects page."""
     context = {}
     return render(request, "projects.html", context)
 
 
+@login_required
 def formations(request):
     """Render the formations page with all formations."""
     formations_list = formation_services.get_all_formations()
@@ -42,6 +46,7 @@ def formations(request):
     return render(request, "formations.html", context)
 
 
+@login_required
 def course(request, pk):
     """Render the course detail page."""
     course_found = course_service.get_course(pk=pk)
@@ -49,6 +54,7 @@ def course(request, pk):
     return render(request, "course.html", context)
 
 
+@login_required
 def courses(request):
     """Render the courses page with all courses."""
     courses_list = course_service.get_courses()
@@ -65,6 +71,7 @@ def courses(request):
     return render(request, "courses.html", context)
 
 
+@login_required
 def certification(request, pk):
     """Render the certification detail page."""
     certification_found = certification_service.get_certification(pk=pk)
@@ -72,6 +79,7 @@ def certification(request, pk):
     return render(request, "certification.html", context)
 
 
+@login_required
 def certifications(request):
     """Render the certifications page with all certifications."""
     certifications_list = certification_service.get_certifications()

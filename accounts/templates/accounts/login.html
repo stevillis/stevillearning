@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Entrar no Sistema{% endblock %}
+{% block content %}
+    <div class="flex flex-col justify-center py-8 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shadow-lg shadow-cyan-500/5">
+                    <img src="{% static 'learning_hub/img/logo.svg' %}?v=2"
+                         alt="Logo"
+                         class="w-10 h-10">
+                </div>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Learning Hub</h1>
+            <p class="mt-2 text-xs sm:text-sm text-slate-400">Insira suas credenciais para acessar a plataforma</p>
+        </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-slate-900 border border-slate-800/80 py-8 px-6 sm:px-10 rounded-2xl shadow-xl shadow-black/40">
+                <form class="space-y-5" method="post" action="{% url 'accounts:login' %}">
+                    {% csrf_token %}
+                    {% if next %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% endif %}
+                    {% if form.errors %}
+                        <div class="rounded-xl bg-red-950/60 border border-red-800/80 p-4 flex items-start gap-3 text-red-200">
+                            <i class="bi bi-exclamation-triangle-fill text-red-400 text-lg shrink-0 mt-0.5"></i>
+                            <div>
+                                <h3 class="text-sm font-semibold text-red-300">Falha na autenticação</h3>
+                                <p class="text-xs sm:text-sm text-red-400 mt-1">Verifique se o usuário e senha estão corretos e tente novamente.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <label for="id_username"
+                               class="block text-sm font-medium text-slate-300 mb-1.5">Usuário</label>
+                        <input id="id_username"
+                               name="username"
+                               type="text"
+                               required
+                               autocomplete="username"
+                               class="appearance-none block w-full px-4 py-3 sm:py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="id_password"
+                               class="block text-sm font-medium text-slate-300 mb-1.5">Senha</label>
+                        <input id="id_password"
+                               name="password"
+                               type="password"
+                               required
+                               autocomplete="current-password"
+                               class="appearance-none block w-full px-4 py-3 sm:py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all sm:text-sm">
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit"
+                                class="w-full flex justify-center py-3 sm:py-2.5 px-4 border border-transparent rounded-xl shadow-lg shadow-cyan-500/20 text-sm font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-cyan-400 active:scale-[0.98] transition-all">
+                            Entrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

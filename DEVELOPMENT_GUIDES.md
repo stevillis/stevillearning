@@ -7,7 +7,7 @@ Este guia detalha o fluxo de desenvolvimento local, inicialização do projeto, 
 ## 1. Tecnologias Base
 
 - **Gerenciador de Dependências**: `uv`
-- **Backend**: Python 3.12+ (Django 5.2, Django REST Framework, SimpleJWT)
+- **Backend**: Python 3.12+ (Django 5.2, Django REST Framework, SimpleJWT, django-axes, django-ipware)
 - **Frontend**: Django Templates + Tailwind CSS (v4 Standalone CLI)
 - **Banco de Dados Local**: PostgreSQL via Docker (ou SQLite para testes rápidos)
 - **Servidor de Arquivos Estáticos**: WhiteNoise (`whitenoise.storage.CompressedStaticFilesStorage`)
@@ -46,6 +46,19 @@ Siga os passos abaixo para preparar o ambiente local pela primeira vez:
    ```bash
    uv run python manage.py migrate
    ```
+
+5. **Crie o Superusuário Administrativo**:
+   Como as rotas do Learning Hub exigem login (`@login_required`), crie seu usuário para autenticar:
+
+   ```bash
+   uv run python manage.py createsuperuser
+   ```
+
+   > [!TIP]
+   > Se estiver executando o projeto via Docker Compose, crie o usuário com:
+   > ```bash
+   > docker compose exec web python manage.py createsuperuser
+   > ```
 
 ---
 
@@ -88,11 +101,44 @@ uv run python manage.py migrate
 
 ### Criar Superusuário
 
-Para acessar o painel administrativo (`/admin/`):
+Para autenticar no Learning Hub e acessar o painel administrativo (`/admin/`):
 
-```bash
-uv run python manage.py createsuperuser
-```
+- **Ambiente Local (`uv`)**:
+
+  ```bash
+  uv run python manage.py createsuperuser
+  ```
+
+- **Via Docker Compose**:
+
+  ```bash
+  docker compose exec web python manage.py createsuperuser
+  ```
+
+### Gerenciamento de Bloqueios Brute-Force (`django-axes`)
+
+O sistema protege contra ataques de força bruta limitando tentativas incorretas de login (máximo 5 tentativas, 15 minutos de bloqueio). Se você ou seu IP forem bloqueados durante o desenvolvimento ou testes:
+
+- **Listar tentativas registradas e bloqueios ativos**:
+
+  ```bash
+  uv run python manage.py axes_list_attempts
+  ```
+
+- **Desbloquear todos os bloqueios e tentativas**:
+
+  ```bash
+  uv run python manage.py axes_reset
+  ```
+
+- **Desbloquear um usuário ou IP específico**:
+
+  ```bash
+  uv run python manage.py axes_reset --username seu_usuario
+  uv run python manage.py axes_reset --ip 127.0.0.1
+  ```
+
+  *(Se estiver rodando via Docker, substitua `uv run python` por `docker compose exec web python`)*.
 
 ---
 
@@ -109,6 +155,8 @@ uv run pytest
 # Executar arquivos de teste específicos
 uv run pytest learning_hub/test_api.py
 uv run pytest learning_hub/tests_dashboard.py
+uv run pytest learning_hub/tests_auth_protection.py
+uv run pytest accounts/tests/
 ```
 
 ### Relatório de Cobertura de Testes
@@ -139,7 +187,7 @@ uv run ruff format
 #### Templates HTML (djLint)
 
 ```bash
-uv run djlint learning_hub/templates/ stevillearning/templates/ theme/templates/
+uv run djlint accounts/templates/ learning_hub/templates/ stevillearning/templates/ theme/templates/
 ```
 
 #### Hooks do Pre-Commit
@@ -182,7 +230,13 @@ Sobe o contêiner da aplicação rodando com Gunicorn:
    docker compose up --build
    ```
 
-2. Acesse a aplicação em: [http://localhost:8003/](http://localhost:8003/)
+2. Crie o superusuário para login através do contêiner:
+
+   ```bash
+   docker compose exec web python manage.py createsuperuser
+   ```
+
+3. Acesse a aplicação em: [http://localhost:8003/](http://localhost:8003/)
 
 ---
 

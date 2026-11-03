@@ -165,6 +165,9 @@ Se estiver implantando em uma VPS própria (ex: Oracle Cloud, DigitalOcean, Hetz
    }
    ```
 
+    > [!NOTE]
+    > Os cabeçalhos `X-Real-IP` e `X-Forwarded-For` são fundamentais para que o `django-ipware` identifique o IP real do cliente e a proteção contra força bruta (`django-axes`) funcione com precisão por visitante/IP, e não bloqueie o IP do próprio proxy reverso.
+
 2. **Ativar o site e recarregar o Nginx**:
 
    ```bash
@@ -217,4 +220,27 @@ Se ao acessar o ambiente de produção for retornado erro de tabela não encontr
 
    ```bash
    curl -I http://localhost:8003/static/css/dist/styles.css
+   ```
+
+### Bloqueio por Tentativas Excessivas de Login (Axes Lockout em Produção)
+
+Caso uma conta ou endereço IP seja bloqueado temporariamente por excesso de tentativas falhas (status HTTP 403 / tela de lockout):
+
+1. **Desbloquear todos os bloqueios e tentativas**:
+
+   ```bash
+   docker compose exec web python manage.py axes_reset
+   ```
+
+2. **Desbloquear apenas um usuário ou IP específico**:
+
+   ```bash
+   docker compose exec web python manage.py axes_reset --username seu_admin
+   docker compose exec web python manage.py axes_reset --ip IP_DO_CLIENTE
+   ```
+
+3. **Inspecionar tentativas registradas**:
+
+   ```bash
+   docker compose exec web python manage.py axes_list_attempts
    ```
