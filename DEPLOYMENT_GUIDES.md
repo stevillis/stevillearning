@@ -196,6 +196,9 @@ docker compose exec web python manage.py migrate
 docker compose exec web python manage.py createsuperuser
 ```
 
+> [!TIP]
+> **Guia de Banco de Dados**: Para instruções completas sobre rotinas de backup (`pg_dump`), restauração (`psql`), migrações falsas (`--fake`), sincronização de tabelas e resolução detalhada de problemas de banco de dados, consulte o [Guia de Banco de Dados (`DATABASE_GUIDES.md`)](DATABASE_GUIDES.md).
+
 ---
 
 ## 6. Resolução de Problemas (Troubleshooting)
