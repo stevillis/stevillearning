@@ -133,11 +133,7 @@ docker push stevillis/stevillearning:latest
 Na VPS ou servidor de hospedagem, navegue até a pasta da aplicação e execute:
 
 ```bash
-# Baixar a versão mais recente da imagem publicada no Docker Hub
-docker compose pull
-
-# Subir a aplicação em modo detached (background)
-docker compose up -d
+sudo docker compose pull && sudo docker compose up -d --remove-orphans && sudo docker image prune -f
 ```
 
 ---
@@ -190,10 +186,10 @@ Após subir o container em produção, execute as migrações do banco de dados 
 
 ```bash
 # Executar migrações do Django
-docker compose exec web python manage.py migrate
+sudo docker compose exec web python manage.py migrate
 
 # Criar superusuário administrativo em produção
-docker compose exec web python manage.py createsuperuser
+sudo docker compose exec web python manage.py createsuperuser
 ```
 
 > [!TIP]
@@ -232,18 +228,18 @@ Caso uma conta ou endereço IP seja bloqueado temporariamente por excesso de ten
 1. **Desbloquear todos os bloqueios e tentativas**:
 
    ```bash
-   docker compose exec web python manage.py axes_reset
+   sudo docker compose exec web python manage.py axes_reset
    ```
 
 2. **Desbloquear apenas um usuário ou IP específico**:
 
    ```bash
-   docker compose exec web python manage.py axes_reset --username seu_admin
-   docker compose exec web python manage.py axes_reset --ip IP_DO_CLIENTE
+   sudo docker compose exec web python manage.py axes_reset --username seu_admin
+   sudo docker compose exec web python manage.py axes_reset --ip IP_DO_CLIENTE
    ```
 
 3. **Inspecionar tentativas registradas**:
 
    ```bash
-   docker compose exec web python manage.py axes_list_attempts
+   sudo docker compose exec web python manage.py axes_list_attempts
    ```
