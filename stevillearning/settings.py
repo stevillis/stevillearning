@@ -151,6 +151,12 @@ else:
         }
     }
 
+if "postgresql" in DATABASES["default"].get("ENGINE", ""):
+    DATABASES["default"].setdefault("OPTIONS", {}).setdefault(
+        "connect_timeout",
+        env.int("DB_CONNECT_TIMEOUT", default=5),
+    )
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

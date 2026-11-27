@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="description"
+              content="Serviço temporariamente indisponível - Stévillis Sousa Learning Hub" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Serviço Indisponível | Stévillis Sousa - Learning Hub</title>
+        <style>
+            :root {
+                --bg-dark: #0b0f19;
+                --bg-header: rgba(15, 23, 42, 0.92);
+                --bg-surface: #111827;
+                --bg-surface-hover: #1f2937;
+                --border-subtle: rgba(255, 255, 255, 0.08);
+                --border-strong: #334155;
+                --text-primary: #f3f4f6;
+                --text-muted: #9ca3af;
+                --accent-cyan: #22d3ee;
+                --accent-cyan-hover: #67e8f9;
+                --accent-amber: #fbbf24;
+                --amber-bg: rgba(245, 158, 11, 0.12);
+                --amber-border: rgba(245, 158, 11, 0.28);
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html,
+            body {
+                min-height: 100%;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                background-color: var(--bg-dark);
+                background-image: radial-gradient(
+                    ellipse 60% 40% at 50% 0%,
+                    rgba(6, 182, 212, 0.08),
+                    transparent 70%
+                );
+                color: var(--text-primary);
+                font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .site-header {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                width: 100%;
+                background-color: var(--bg-header);
+                border-bottom: 1px solid rgba(30, 41, 59, 0.85);
+            }
+
+            .header-inner {
+                max-width: 80rem;
+                margin: 0 auto;
+                padding: 0 1.25rem;
+                height: 4.25rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .brand-logo {
+                width: 2rem;
+                height: 2rem;
+                flex-shrink: 0;
+            }
+
+            .brand-text {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .brand-name {
+                font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #ffffff;
+                letter-spacing: -0.02em;
+            }
+
+            .brand-divider {
+                width: 1px;
+                height: 1rem;
+                background-color: #334155;
+            }
+
+            .brand-product {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: var(--text-muted);
+            }
+
+            .main-content {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2.5rem 1.25rem;
+            }
+
+            .status-shell {
+                width: 100%;
+                max-width: 28rem;
+            }
+
+            .status-card {
+                background-color: var(--bg-surface);
+                border: 1px solid var(--border-subtle);
+                border-radius: 1rem;
+                padding: 2rem 1.75rem;
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+                text-align: center;
+            }
+
+            .icon-badge {
+                width: 4rem;
+                height: 4rem;
+                margin: 0 auto 1.25rem;
+                border-radius: 1rem;
+                background-color: var(--amber-bg);
+                border: 1px solid var(--amber-border);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--accent-amber);
+            }
+
+            .status-pill {
+                display: inline-block;
+                margin-bottom: 1rem;
+                padding: 0.25rem 0.65rem;
+                border-radius: 9999px;
+                background-color: var(--amber-bg);
+                border: 1px solid var(--amber-border);
+                color: var(--accent-amber);
+                font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 0.75rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+            }
+
+            .status-title {
+                font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+                font-size: 1.5rem;
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                color: #ffffff;
+                line-height: 1.25;
+                text-wrap: balance;
+                margin-bottom: 0.75rem;
+            }
+
+            .status-description {
+                font-size: 0.9375rem;
+                color: var(--text-muted);
+                max-width: 38ch;
+                margin: 0 auto 1.75rem;
+                text-wrap: pretty;
+            }
+
+            .actions {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border-radius: 0.75rem;
+                font-family: inherit;
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+            }
+
+            .btn:focus-visible {
+                outline: 2px solid var(--accent-cyan);
+                outline-offset: 2px;
+            }
+
+            .btn:active {
+                transform: scale(0.985);
+            }
+
+            .btn-primary {
+                border: 1px solid transparent;
+                background-color: var(--accent-cyan);
+                color: #020617;
+                box-shadow: 0 8px 20px rgba(34, 211, 238, 0.18);
+            }
+
+            .btn-primary:hover {
+                background-color: var(--accent-cyan-hover);
+            }
+
+            .btn-secondary {
+                border: 1px solid var(--border-strong);
+                background-color: var(--bg-surface-hover);
+                color: #e2e8f0;
+            }
+
+            .btn-secondary:hover {
+                background-color: #273449;
+                border-color: #475569;
+            }
+
+            .portfolio-link {
+                display: inline-block;
+                margin-top: 1.25rem;
+                font-size: 0.8125rem;
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: color 0.15s ease;
+            }
+
+            .portfolio-link:hover {
+                color: var(--accent-cyan);
+            }
+
+            .portfolio-link:focus-visible {
+                outline: 2px solid var(--accent-cyan);
+                outline-offset: 3px;
+                border-radius: 0.25rem;
+            }
+
+            @media (min-width: 640px) {
+                .header-inner {
+                    padding: 0 2rem;
+                    height: 5rem;
+                }
+
+                .status-card {
+                    padding: 2.25rem 2.5rem;
+                }
+
+                .status-title {
+                    font-size: 1.625rem;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .btn,
+                .portfolio-link {
+                    transition: none;
+                }
+
+                .btn:active {
+                    transform: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="brand">
+                    <svg class="brand-logo"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 512 512"
+                         aria-hidden="true">
+                        <defs>
+                        <linearGradient id="cap-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38BDF8" />
+                        <stop offset="50%" stop-color="#00F2FE" />
+                        <stop offset="100%" stop-color="#0284C7" />
+                        </linearGradient>
+                        <linearGradient id="cap-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#0369A1" />
+                        <stop offset="100%" stop-color="#0F172A" />
+                        </linearGradient>
+                        <linearGradient id="s-main-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38BDF8" />
+                        <stop offset="40%" stop-color="#00F2FE" />
+                        <stop offset="80%" stop-color="#0284C7" />
+                        <stop offset="100%" stop-color="#0369A1" />
+                        </linearGradient>
+                        <linearGradient id="s-inner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#E0F2FE" />
+                        <stop offset="50%" stop-color="#38BDF8" />
+                        <stop offset="100%" stop-color="#00F2FE" />
+                        </linearGradient>
+                        </defs>
+                        <g>
+                        <polygon points="256,38 468,106 256,174 44,106" fill="url(#cap-gradient)" />
+                        <polygon points="256,174 468,106 468,114 256,182 44,114 44,106" fill="#0284C7" opacity="0.9" />
+                        <path d="M 160,146 Q 256,186 352,146 L 352,182 Q 256,222 160,182 Z" fill="url(#cap-dark)" stroke="#38BDF8" stroke-width="2" />
+                        <ellipse cx="256" cy="106" rx="9" ry="5" fill="#E0F2FE" />
+                        <path d="M 256,106 Q 370,116 422,180" fill="none" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round" />
+                        <ellipse cx="422" cy="184" rx="5" ry="3" fill="#38BDF8" />
+                        <polygon points="418,186 426,186 430,226 414,226" fill="#00F2FE" />
+                        </g>
+                        <g>
+                        <path d="M 345,212 L 210,212 C 145,212 145,292 210,312 L 302,338 C 367,358 367,438 302,458 L 165,458" fill="none" stroke="url(#s-main-grad)" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M 345,212 L 210,212 C 145,212 145,292 210,312 L 302,338 C 367,358 367,438 302,458 L 165,458" fill="none" stroke="url(#s-inner-grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+                        <path d="M 190,212 L 270,212 L 295,237 L 295,260" fill="none" stroke="#E0F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="190" cy="212" r="5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="2" />
+                        <circle cx="295" cy="260" r="4.5" fill="#38BDF8" />
+                        <path d="M 235,320 L 275,330 L 275,360 L 310,360" fill="none" stroke="#00F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="235" cy="320" r="4.5" fill="#7DD3FC" />
+                        <circle cx="310" cy="360" r="5.5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="1.5" />
+                        <path d="M 320,458 L 240,458 L 215,433 L 215,410" fill="none" stroke="#E0F2FE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="320" cy="458" r="5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="2" />
+                        <circle cx="215" cy="410" r="4.5" fill="#38BDF8" />
+                        <circle cx="160" cy="345" r="4" fill="#00F2FE" />
+                        <circle cx="352" cy="325" r="4" fill="#7DD3FC" />
+                        </g>
+                    </svg>
+                    <div class="brand-text">
+                        <span class="brand-name">Stévillis Sousa</span>
+                        <span class="brand-divider" aria-hidden="true"></span>
+                        <span class="brand-product">Learning Hub</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="main-content">
+            <section class="status-shell" aria-labelledby="error-title">
+                <div class="status-card">
+                    <div class="icon-badge" aria-hidden="true">
+                        <svg width="28"
+                             height="28"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                    </div>
+                    <span class="status-pill">HTTP 500</span>
+                    <h1 id="error-title" class="status-title">Sistema temporariamente indisponível</h1>
+                    <p class="status-description">
+                        Não foi possível estabelecer conexão com o sistema no momento. Aguarde alguns instantes e tente novamente.
+                    </p>
+                    <div class="actions">
+                        <button type="button"
+                                class="btn btn-primary"
+                                onclick="window.location.reload()">
+                            <svg width="16"
+                                 height="16"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2.2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <polyline points="23 4 23 10 17 10" />
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                            </svg>
+                            <span>Tentar novamente</span>
+                        </button>
+                        <a href="{% url 'accounts:login' %}" class="btn btn-secondary">Voltar para o login</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
